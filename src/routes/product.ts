@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
         if (search) {
             whereCondition.OR = [
                 { name: { contains: search, mode: 'insensitive' } },
-                { description: { contains: search, mode: 'insensitive' } }
+                { slug: { contains: search, mode: 'insensitive' } }
             ];
         }
 
@@ -64,3 +64,4 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
+

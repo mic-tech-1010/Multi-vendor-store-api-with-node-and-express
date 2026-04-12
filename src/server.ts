@@ -6,10 +6,10 @@ import productrouter from '#routes/product.js';
 const app: Express = express();
 
 const corsOptions: CorsOptions = {
-  origin: process.env.FRONTEND_URL, // Allow only this origin
-  methods: ['GET', 'POST'],        // Allow only these methods
-  credentials: true,               // Allow cookies/headers
-  optionsSuccessStatus: 200        // Some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: process.env.FRONTEND_URL, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
+  credentials: true,              
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
