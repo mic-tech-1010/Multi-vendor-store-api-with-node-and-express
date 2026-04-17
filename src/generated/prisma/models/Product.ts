@@ -32,8 +32,6 @@ export type ProductAvgAggregateOutputType = {
   categoryId: number | null
   price: runtime.Decimal | null
   quantity: number | null
-  createdBy: number | null
-  updatedBy: number | null
 }
 
 export type ProductSumAggregateOutputType = {
@@ -42,8 +40,6 @@ export type ProductSumAggregateOutputType = {
   categoryId: number | null
   price: runtime.Decimal | null
   quantity: number | null
-  createdBy: number | null
-  updatedBy: number | null
 }
 
 export type ProductMinAggregateOutputType = {
@@ -59,8 +55,8 @@ export type ProductMinAggregateOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   hasVariations: boolean | null
-  createdBy: number | null
-  updatedBy: number | null
+  createdBy: string | null
+  updatedBy: string | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -79,8 +75,8 @@ export type ProductMaxAggregateOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   hasVariations: boolean | null
-  createdBy: number | null
-  updatedBy: number | null
+  createdBy: string | null
+  updatedBy: string | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -114,8 +110,6 @@ export type ProductAvgAggregateInputType = {
   categoryId?: true
   price?: true
   quantity?: true
-  createdBy?: true
-  updatedBy?: true
 }
 
 export type ProductSumAggregateInputType = {
@@ -124,8 +118,6 @@ export type ProductSumAggregateInputType = {
   categoryId?: true
   price?: true
   quantity?: true
-  createdBy?: true
-  updatedBy?: true
 }
 
 export type ProductMinAggregateInputType = {
@@ -288,8 +280,8 @@ export type ProductGroupByOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   hasVariations: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -331,8 +323,8 @@ export type ProductWhereInput = {
   metaTitle?: Prisma.StringNullableFilter<"Product"> | string | null
   metaDescription?: Prisma.StringNullableFilter<"Product"> | string | null
   hasVariations?: Prisma.BoolFilter<"Product"> | boolean
-  createdBy?: Prisma.IntFilter<"Product"> | number
-  updatedBy?: Prisma.IntFilter<"Product"> | number
+  createdBy?: Prisma.StringFilter<"Product"> | string
+  updatedBy?: Prisma.StringFilter<"Product"> | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -382,8 +374,8 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   metaTitle?: Prisma.StringNullableFilter<"Product"> | string | null
   metaDescription?: Prisma.StringNullableFilter<"Product"> | string | null
   hasVariations?: Prisma.BoolFilter<"Product"> | boolean
-  createdBy?: Prisma.IntFilter<"Product"> | number
-  updatedBy?: Prisma.IntFilter<"Product"> | number
+  createdBy?: Prisma.StringFilter<"Product"> | string
+  updatedBy?: Prisma.StringFilter<"Product"> | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -434,8 +426,8 @@ export type ProductScalarWhereWithAggregatesInput = {
   metaTitle?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   metaDescription?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   hasVariations?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
-  createdBy?: Prisma.IntWithAggregatesFilter<"Product"> | number
-  updatedBy?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  createdBy?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  updatedBy?: Prisma.StringWithAggregatesFilter<"Product"> | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -473,8 +465,8 @@ export type ProductUncheckedCreateInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -512,8 +504,8 @@ export type ProductUncheckedUpdateInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -532,8 +524,8 @@ export type ProductCreateManyInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -567,8 +559,8 @@ export type ProductUncheckedUpdateManyInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -610,8 +602,6 @@ export type ProductAvgOrderByAggregateInput = {
   categoryId?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedBy?: Prisma.SortOrder
 }
 
 export type ProductMaxOrderByAggregateInput = {
@@ -660,8 +650,6 @@ export type ProductSumOrderByAggregateInput = {
   categoryId?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedBy?: Prisma.SortOrder
 }
 
 export type ProductCreateNestedManyWithoutCreatedByUserInput = {
@@ -871,7 +859,7 @@ export type ProductUncheckedCreateWithoutCreatedByUserInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  updatedBy: number
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -918,7 +906,7 @@ export type ProductUncheckedCreateWithoutUpdatedByUserInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
+  createdBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -966,8 +954,8 @@ export type ProductScalarWhereInput = {
   metaTitle?: Prisma.StringNullableFilter<"Product"> | string | null
   metaDescription?: Prisma.StringNullableFilter<"Product"> | string | null
   hasVariations?: Prisma.BoolFilter<"Product"> | boolean
-  createdBy?: Prisma.IntFilter<"Product"> | number
-  updatedBy?: Prisma.IntFilter<"Product"> | number
+  createdBy?: Prisma.StringFilter<"Product"> | string
+  updatedBy?: Prisma.StringFilter<"Product"> | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -1019,8 +1007,8 @@ export type ProductUncheckedCreateWithoutDepartmentInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1082,8 +1070,8 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1128,7 +1116,7 @@ export type ProductCreateManyCreatedByUserInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  updatedBy: number
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1147,7 +1135,7 @@ export type ProductCreateManyUpdatedByUserInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
+  createdBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1184,7 +1172,7 @@ export type ProductUncheckedUpdateWithoutCreatedByUserInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1203,7 +1191,7 @@ export type ProductUncheckedUpdateManyWithoutCreatedByUserInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1240,7 +1228,7 @@ export type ProductUncheckedUpdateWithoutUpdatedByUserInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1259,7 +1247,7 @@ export type ProductUncheckedUpdateManyWithoutUpdatedByUserInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1277,8 +1265,8 @@ export type ProductCreateManyDepartmentInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1314,8 +1302,8 @@ export type ProductUncheckedUpdateWithoutDepartmentInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1333,8 +1321,8 @@ export type ProductUncheckedUpdateManyWithoutDepartmentInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1352,8 +1340,8 @@ export type ProductCreateManyCategoryInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   hasVariations?: boolean
-  createdBy: number
-  updatedBy: number
+  createdBy: string
+  updatedBy: string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1389,8 +1377,8 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1408,8 +1396,8 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1550,8 +1538,8 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     metaTitle: string | null
     metaDescription: string | null
     hasVariations: boolean
-    createdBy: number
-    updatedBy: number
+    createdBy: string
+    updatedBy: string
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1994,8 +1982,8 @@ export interface ProductFieldRefs {
   readonly metaTitle: Prisma.FieldRef<"Product", 'String'>
   readonly metaDescription: Prisma.FieldRef<"Product", 'String'>
   readonly hasVariations: Prisma.FieldRef<"Product", 'Boolean'>
-  readonly createdBy: Prisma.FieldRef<"Product", 'Int'>
-  readonly updatedBy: Prisma.FieldRef<"Product", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"Product", 'String'>
+  readonly updatedBy: Prisma.FieldRef<"Product", 'String'>
   readonly deletedAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Product", 'DateTime'>
