@@ -12,14 +12,33 @@ datasource db {
   provider = "postgresql"
 }
 
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  posts Post[]
+// ENUM for user roles
+enum Role {
+  admin
+  vendor
+  customer
+}
+
+model User {
+  id              String   @id @db.Text
+  name            String
+  email           String   @unique
+  emailVerified   Boolean  @default(false)
+  image           String?
+
+  // Custom fields
+  role            Role     @default(customer)
+  imageCldPubId   String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  sessions        Session[]
+  accounts        Account[]
   productsCreated Product[] @relation("ProductCreatedBy")
   productsUpdated Product[] @relation("ProductUpdatedBy")
-} 
+}
 
 model Department {
   id              Int       @id @default(autoincrement())
@@ -67,9 +86,9 @@ model Product {
   metaTitle      String?
   metaDescription String?
   hasVariations  Boolean   @default(false)
-  createdBy      Int
+  createdBy      String   @db.Text
   createdByUser  User      @relation("ProductCreatedBy", fields: [createdBy], references: [id])
-  updatedBy      Int
+  updatedBy      String   @db.Text
   updatedByUser  User      @relation("ProductUpdatedBy", fields: [updatedBy], references: [id])
   deletedAt      DateTime?
   createdAt      DateTime   @default(now())
@@ -79,11 +98,56 @@ model Product {
   @@index([hasVariations])
 }
 
-model Post { 
-  id        Int     @id @default(autoincrement()) 
-  title     String
-  content   String?
-  published Boolean @default(false) 
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  Int
-} 
+
+model Session {
+  id          String   @id @db.Text
+  userId      String   @db.Text
+  token       String   @unique
+  expiresAt   DateTime
+  ipAddress   String?
+  userAgent   String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "idx_session_userId")
+}
+
+model Account {
+  id                        String   @id @db.Text
+  userId                    String   @db.Text
+  accountId                 String
+  providerId                String
+
+  accessToken               String?
+  refreshToken              String?
+  accessTokenExpiresAt      DateTime?
+  refreshTokenExpiresAt     DateTime?
+  scope                     String?
+  idToken                   String?
+  password                  String?
+
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  // Relations
+  user                      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "idx_account_userId")
+  @@unique([providerId, accountId], name: "uq_account_provider_account")
+}
+
+model Verification {
+  id          String   @id @db.Text
+  identifier  String
+  value       String
+  expiresAt   DateTime
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([identifier], name: "idx_verification_identifier")
+}

@@ -1,4 +1,4 @@
-import { prisma } from "./lib/prisma";
+import { prisma } from "./db/prisma";
 
 async function main() {
   // Create a sample user first (required for product createdBy/updatedBy)
