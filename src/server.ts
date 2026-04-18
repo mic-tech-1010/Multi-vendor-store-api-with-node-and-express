@@ -2,6 +2,9 @@ import 'dotenv/config';
 import express, {type Express, type Request, type Response } from 'express';
 import cors, { type  CorsOptions } from 'cors';
 import productrouter from '#routes/product.js';
+import securityMiddleware from '#middleware/security.js';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from '#lib/auth.js';
 
 const app: Express = express();
 
@@ -13,7 +16,12 @@ const corsOptions: CorsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.all('/api/auth/*splat', toNodeHandler(auth));
+
 app.use(express.json());
+
+app.use(securityMiddleware);
 
 app.get('/api/data', (req: Request, res: Response) => {
   res.json({ message: "Hello from Express!" });
