@@ -29,7 +29,7 @@ model User {
   // Custom fields
   role            Role     @default(customer)
   imageCldPubId   String?
-  
+  y
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
