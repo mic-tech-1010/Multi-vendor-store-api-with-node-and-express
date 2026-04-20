@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 
         if (department) {
             whereCondition.department = { name: { contains: department, mode: 'insensitive' } };
-        }
+        }     
 
         if (category) {
             whereCondition.category = { name: { contains: category, mode: 'insensitive' } };

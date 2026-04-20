@@ -5,6 +5,8 @@ import productrouter from '#routes/product.js';
 import securityMiddleware from '#middleware/security.js';
 import { toNodeHandler } from 'better-auth/node';
 import { auth } from '#lib/auth.js';
+import userRouter from '#routes/user.js';
+import departmentRouter from '#routes/department.js';
 
 const app: Express = express();
 
@@ -21,13 +23,17 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 
 app.use(express.json());
 
-app.use(securityMiddleware);
+// app.use(securityMiddleware);
 
 app.get('/api/data', (req: Request, res: Response) => {
   res.json({ message: "Hello from Express!" });
 });
 
 app.use('/api/products', productrouter);
+
+app.use('/api/users', userRouter);
+
+app.use('/api/departments', departmentRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 

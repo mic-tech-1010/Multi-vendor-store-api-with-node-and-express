@@ -29,7 +29,6 @@ model User {
   // Custom fields
   role            Role     @default(customer)
   imageCldPubId   String?
-  y
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
@@ -47,6 +46,7 @@ model Department {
   metaTitle       String?   
   metaDescription String?
   active          Boolean   @default(true)
+  imageCldPubId   String?
   deletedAt       DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
@@ -65,6 +65,7 @@ model Category {
   children Category[] @relation("CategoryParent")
 
   active    Boolean   @default(true)
+  imageCldPubId   String?
   deletedAt DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

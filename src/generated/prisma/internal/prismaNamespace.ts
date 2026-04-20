@@ -989,6 +989,7 @@ export const DepartmentScalarFieldEnum = {
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   active: 'active',
+  imageCldPubId: 'imageCldPubId',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1003,6 +1004,7 @@ export const CategoryScalarFieldEnum = {
   departmentId: 'departmentId',
   parentId: 'parentId',
   active: 'active',
+  imageCldPubId: 'imageCldPubId',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
