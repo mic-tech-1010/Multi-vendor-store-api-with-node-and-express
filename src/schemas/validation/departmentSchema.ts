@@ -5,6 +5,8 @@ export const CreateDepartmentSchema = {
     name: { type: 'string', minLength: 2, maxLength: 100 },
     slug: { type: 'string', minLength: 2, maxLength: 100 },
     metaTitle: { type: 'string', minLength: 2, maxLength: 100 },
-    metaDescription: { type: 'string', minLength: 2, maxLength: 160 }
+    metaDescription: { type: 'string', minLength: 2, maxLength: 160 },
+    bannerUrl: { type: 'string' },
+    bannerCldPubId: { type: 'string' },
   }
 } as const;

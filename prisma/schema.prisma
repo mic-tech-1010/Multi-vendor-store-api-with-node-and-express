@@ -24,11 +24,11 @@ model User {
   name            String
   email           String   @unique
   emailVerified   Boolean  @default(false)
-  image           String?
 
   // Custom fields
   role            Role     @default(customer)
   imageCldPubId   String?
+  image           String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
@@ -46,7 +46,9 @@ model Department {
   metaTitle       String?   
   metaDescription String?
   active          Boolean   @default(true)
-  imageCldPubId   String?
+  bannerCldPubId  String?
+  bannerUrl       String?
+  bannerAltText   String?
   deletedAt       DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
@@ -57,6 +59,7 @@ model Department {
 model Category {
   id           Int       @id @default(autoincrement())
   name         String
+  slug           String    @unique
   departmentId Int
   department   Department @relation(fields: [departmentId], references: [id])
 
@@ -65,18 +68,23 @@ model Category {
   children Category[] @relation("CategoryParent")
 
   active    Boolean   @default(true)
-  imageCldPubId   String?
+  bannerCldPubId  String?
+  bannerUrl       String?
+  bannerAltText   String?
   deletedAt DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   products  Product[]
+
+  @@unique([name, departmentId])
 }
 
 model Product {
   id             Int       @id @default(autoincrement())
   name           String  
-  slug           String  
+  slug           String    @unique
   description    String
+  images         ProductImage[]
   departmentId   Int
   department     Department @relation(fields: [departmentId], references: [id])
   categoryId     Int
@@ -99,6 +107,22 @@ model Product {
   @@index([hasVariations])
 }
 
+model ProductImage {
+  id              Int       @id @default(autoincrement())
+
+  imageUrl        String
+  imageCldPubId   String
+
+  imageAltText    String
+
+  productId       Int
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  isPrimary       Boolean  @default(false) // main image
+  order           Int      @default(0)     // for sorting
+
+  createdAt       DateTime @default(now())
+}
 
 model Session {
   id          String   @id @db.Text

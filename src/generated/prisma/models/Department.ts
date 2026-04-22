@@ -41,7 +41,9 @@ export type DepartmentMinAggregateOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   active: boolean | null
-  imageCldPubId: string | null
+  bannerCldPubId: string | null
+  bannerUrl: string | null
+  bannerAltText: string | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,7 +56,9 @@ export type DepartmentMaxAggregateOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   active: boolean | null
-  imageCldPubId: string | null
+  bannerCldPubId: string | null
+  bannerUrl: string | null
+  bannerAltText: string | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -67,7 +71,9 @@ export type DepartmentCountAggregateOutputType = {
   metaTitle: number
   metaDescription: number
   active: number
-  imageCldPubId: number
+  bannerCldPubId: number
+  bannerUrl: number
+  bannerAltText: number
   deletedAt: number
   createdAt: number
   updatedAt: number
@@ -90,7 +96,9 @@ export type DepartmentMinAggregateInputType = {
   metaTitle?: true
   metaDescription?: true
   active?: true
-  imageCldPubId?: true
+  bannerCldPubId?: true
+  bannerUrl?: true
+  bannerAltText?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -103,7 +111,9 @@ export type DepartmentMaxAggregateInputType = {
   metaTitle?: true
   metaDescription?: true
   active?: true
-  imageCldPubId?: true
+  bannerCldPubId?: true
+  bannerUrl?: true
+  bannerAltText?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -116,7 +126,9 @@ export type DepartmentCountAggregateInputType = {
   metaTitle?: true
   metaDescription?: true
   active?: true
-  imageCldPubId?: true
+  bannerCldPubId?: true
+  bannerUrl?: true
+  bannerAltText?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -216,7 +228,9 @@ export type DepartmentGroupByOutputType = {
   metaTitle: string | null
   metaDescription: string | null
   active: boolean
-  imageCldPubId: string | null
+  bannerCldPubId: string | null
+  bannerUrl: string | null
+  bannerAltText: string | null
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -252,7 +266,9 @@ export type DepartmentWhereInput = {
   metaTitle?: Prisma.StringNullableFilter<"Department"> | string | null
   metaDescription?: Prisma.StringNullableFilter<"Department"> | string | null
   active?: Prisma.BoolFilter<"Department"> | boolean
-  imageCldPubId?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerCldPubId?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerUrl?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerAltText?: Prisma.StringNullableFilter<"Department"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Department"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Department"> | Date | string
@@ -267,7 +283,9 @@ export type DepartmentOrderByWithRelationInput = {
   metaTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   metaDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
-  imageCldPubId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerCldPubId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerAltText?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -285,7 +303,9 @@ export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
   metaTitle?: Prisma.StringNullableFilter<"Department"> | string | null
   metaDescription?: Prisma.StringNullableFilter<"Department"> | string | null
   active?: Prisma.BoolFilter<"Department"> | boolean
-  imageCldPubId?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerCldPubId?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerUrl?: Prisma.StringNullableFilter<"Department"> | string | null
+  bannerAltText?: Prisma.StringNullableFilter<"Department"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Department"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Department"> | Date | string
@@ -300,7 +320,9 @@ export type DepartmentOrderByWithAggregationInput = {
   metaTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   metaDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
-  imageCldPubId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerCldPubId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerAltText?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -321,7 +343,9 @@ export type DepartmentScalarWhereWithAggregatesInput = {
   metaTitle?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
   metaDescription?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
   active?: Prisma.BoolWithAggregatesFilter<"Department"> | boolean
-  imageCldPubId?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
+  bannerCldPubId?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
+  bannerUrl?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
+  bannerAltText?: Prisma.StringNullableWithAggregatesFilter<"Department"> | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Department"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Department"> | Date | string
@@ -333,7 +357,9 @@ export type DepartmentCreateInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -348,7 +374,9 @@ export type DepartmentUncheckedCreateInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -362,7 +390,9 @@ export type DepartmentUpdateInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -377,7 +407,9 @@ export type DepartmentUncheckedUpdateInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -392,7 +424,9 @@ export type DepartmentCreateManyInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -404,7 +438,9 @@ export type DepartmentUpdateManyMutationInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -417,7 +453,9 @@ export type DepartmentUncheckedUpdateManyInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -430,7 +468,9 @@ export type DepartmentCountOrderByAggregateInput = {
   metaTitle?: Prisma.SortOrder
   metaDescription?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  imageCldPubId?: Prisma.SortOrder
+  bannerCldPubId?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
+  bannerAltText?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -447,7 +487,9 @@ export type DepartmentMaxOrderByAggregateInput = {
   metaTitle?: Prisma.SortOrder
   metaDescription?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  imageCldPubId?: Prisma.SortOrder
+  bannerCldPubId?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
+  bannerAltText?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -460,7 +502,9 @@ export type DepartmentMinOrderByAggregateInput = {
   metaTitle?: Prisma.SortOrder
   metaDescription?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  imageCldPubId?: Prisma.SortOrder
+  bannerCldPubId?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
+  bannerAltText?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -521,7 +565,9 @@ export type DepartmentCreateWithoutCategoriesInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -535,7 +581,9 @@ export type DepartmentUncheckedCreateWithoutCategoriesInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -564,7 +612,9 @@ export type DepartmentUpdateWithoutCategoriesInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -578,7 +628,9 @@ export type DepartmentUncheckedUpdateWithoutCategoriesInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -591,7 +643,9 @@ export type DepartmentCreateWithoutProductsInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -605,7 +659,9 @@ export type DepartmentUncheckedCreateWithoutProductsInput = {
   metaTitle?: string | null
   metaDescription?: string | null
   active?: boolean
-  imageCldPubId?: string | null
+  bannerCldPubId?: string | null
+  bannerUrl?: string | null
+  bannerAltText?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -634,7 +690,9 @@ export type DepartmentUpdateWithoutProductsInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -648,7 +706,9 @@ export type DepartmentUncheckedUpdateWithoutProductsInput = {
   metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerCldPubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerAltText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -702,7 +762,9 @@ export type DepartmentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   metaTitle?: boolean
   metaDescription?: boolean
   active?: boolean
-  imageCldPubId?: boolean
+  bannerCldPubId?: boolean
+  bannerUrl?: boolean
+  bannerAltText?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -718,7 +780,9 @@ export type DepartmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   metaTitle?: boolean
   metaDescription?: boolean
   active?: boolean
-  imageCldPubId?: boolean
+  bannerCldPubId?: boolean
+  bannerUrl?: boolean
+  bannerAltText?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -731,7 +795,9 @@ export type DepartmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   metaTitle?: boolean
   metaDescription?: boolean
   active?: boolean
-  imageCldPubId?: boolean
+  bannerCldPubId?: boolean
+  bannerUrl?: boolean
+  bannerAltText?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -744,13 +810,15 @@ export type DepartmentSelectScalar = {
   metaTitle?: boolean
   metaDescription?: boolean
   active?: boolean
-  imageCldPubId?: boolean
+  bannerCldPubId?: boolean
+  bannerUrl?: boolean
+  bannerAltText?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DepartmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "metaTitle" | "metaDescription" | "active" | "imageCldPubId" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["department"]>
+export type DepartmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "metaTitle" | "metaDescription" | "active" | "bannerCldPubId" | "bannerUrl" | "bannerAltText" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["department"]>
 export type DepartmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   categories?: boolean | Prisma.Department$categoriesArgs<ExtArgs>
   products?: boolean | Prisma.Department$productsArgs<ExtArgs>
@@ -772,7 +840,9 @@ export type $DepartmentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     metaTitle: string | null
     metaDescription: string | null
     active: boolean
-    imageCldPubId: string | null
+    bannerCldPubId: string | null
+    bannerUrl: string | null
+    bannerAltText: string | null
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1207,7 +1277,9 @@ export interface DepartmentFieldRefs {
   readonly metaTitle: Prisma.FieldRef<"Department", 'String'>
   readonly metaDescription: Prisma.FieldRef<"Department", 'String'>
   readonly active: Prisma.FieldRef<"Department", 'Boolean'>
-  readonly imageCldPubId: Prisma.FieldRef<"Department", 'String'>
+  readonly bannerCldPubId: Prisma.FieldRef<"Department", 'String'>
+  readonly bannerUrl: Prisma.FieldRef<"Department", 'String'>
+  readonly bannerAltText: Prisma.FieldRef<"Department", 'String'>
   readonly deletedAt: Prisma.FieldRef<"Department", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Department", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Department", 'DateTime'>

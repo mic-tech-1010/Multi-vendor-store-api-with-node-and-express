@@ -55,6 +55,7 @@ export const ModelName = {
   Department: 'Department',
   Category: 'Category',
   Product: 'Product',
+  ProductImage: 'ProductImage',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -81,9 +82,9 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image',
   role: 'role',
   imageCldPubId: 'imageCldPubId',
+  image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -98,7 +99,9 @@ export const DepartmentScalarFieldEnum = {
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   active: 'active',
-  imageCldPubId: 'imageCldPubId',
+  bannerCldPubId: 'bannerCldPubId',
+  bannerUrl: 'bannerUrl',
+  bannerAltText: 'bannerAltText',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -110,10 +113,13 @@ export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof
 export const CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  slug: 'slug',
   departmentId: 'departmentId',
   parentId: 'parentId',
   active: 'active',
-  imageCldPubId: 'imageCldPubId',
+  bannerCldPubId: 'bannerCldPubId',
+  bannerUrl: 'bannerUrl',
+  bannerAltText: 'bannerAltText',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -143,6 +149,20 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductImageScalarFieldEnum = {
+  id: 'id',
+  imageUrl: 'imageUrl',
+  imageCldPubId: 'imageCldPubId',
+  imageAltText: 'imageAltText',
+  productId: 'productId',
+  isPrimary: 'isPrimary',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
