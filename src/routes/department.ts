@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 
     const whereCondition: any = {};
 
-    // 🔍 SEARCH (same as product)
+    // 🔍 SEARCH
     if (search) {
       whereCondition.OR = [
         { name: { contains: search, mode: "insensitive" } },
@@ -54,6 +54,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get a single department
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -103,5 +104,100 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Failed to create department" });
   }
 });
+
+// update a department
+router.patch("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      name,
+      slug,
+      metaTitle,
+      metaDescription,
+      bannerUrl,
+      bannerCldPubId
+    } = req.body;
+
+
+    const existingDepartment = await prisma.department.findUnique({
+      where: { id: Number(id) },
+    });
+    
+
+    if (!existingDepartment) {
+      return res.status(404).json({ message: "Department not found" });
+    }
+
+    const updatedDepartment = await prisma.department.update({
+      where: { id: Number(id) },
+      data: {
+        name,
+        slug,
+        metaTitle,
+        metaDescription,
+        bannerUrl,
+        bannerCldPubId,
+      },
+    });
+
+    res.status(200).json({
+      data: updatedDepartment,
+      message: "Department updated successfully",
+    });
+
+  } catch (error) {
+    console.error("PATCH /departments/:id error:", error);
+    res.status(500).json({ message: "Failed to update department" });
+  }
+});
+
+// delete a department
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Fetch department WITH relations
+    const department = await prisma.department.findUnique({
+      where: { id: Number(id) },
+      include: {
+        categories: true,
+        products: true,
+      },
+    });
+
+    //  Not found
+    if (!department) {
+      return res.status(404).json({
+        message: "Department not found",
+      });
+    }
+
+    // Prevent delete if dependencies exist
+    if (department.categories.length > 0 || department.products.length > 0) {
+      return res.status(400).json({
+        message:
+          "This department cannot be deleted because it still contains categories or products. Remove them first.",
+      });
+    }
+
+    // Safe delete
+    await prisma.department.delete({
+      where: { id: Number(id) },
+    });
+
+    return res.status(200).json({
+      message: "Department deleted successfully",
+    });
+
+  } catch (error) {
+    console.error("DELETE /departments/:id error:", error);
+
+    return res.status(500).json({
+      message: "Failed to delete department",
+    });
+  }
+});
+
 
 export default router;

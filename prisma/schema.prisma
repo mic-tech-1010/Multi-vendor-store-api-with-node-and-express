@@ -60,6 +60,8 @@ model Category {
   id           Int       @id @default(autoincrement())
   name         String
   slug           String    @unique
+  metaTitle       String?   
+  metaDescription String?
   departmentId Int
   department   Department @relation(fields: [departmentId], references: [id])
 
