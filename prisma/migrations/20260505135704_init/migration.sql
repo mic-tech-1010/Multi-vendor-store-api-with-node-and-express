@@ -26,6 +26,7 @@ CREATE TABLE "Department" (
     "active" BOOLEAN NOT NULL DEFAULT true,
     "bannerCldPubId" TEXT,
     "bannerUrl" TEXT,
+    "bannerAltText" TEXT,
     "deletedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -37,11 +38,15 @@ CREATE TABLE "Department" (
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "metaTitle" TEXT,
+    "metaDescription" TEXT,
     "departmentId" INTEGER NOT NULL,
     "parentId" INTEGER,
     "active" BOOLEAN NOT NULL DEFAULT true,
     "bannerCldPubId" TEXT,
     "bannerUrl" TEXT,
+    "bannerAltText" TEXT,
     "deletedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -54,7 +59,7 @@ CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" JSONB NOT NULL,
     "departmentId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
@@ -77,6 +82,7 @@ CREATE TABLE "ProductImage" (
     "id" SERIAL NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "imageCldPubId" TEXT NOT NULL,
+    "imageAltText" TEXT NOT NULL,
     "productId" INTEGER NOT NULL,
     "isPrimary" BOOLEAN NOT NULL DEFAULT false,
     "order" INTEGER NOT NULL DEFAULT 0,
@@ -135,6 +141,15 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Department_slug_key" ON "Department"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_name_departmentId_key" ON "Category"("name", "departmentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Product_slug_key" ON "Product"("slug");
 
 -- CreateIndex
 CREATE INDEX "Product_status_idx" ON "Product"("status");

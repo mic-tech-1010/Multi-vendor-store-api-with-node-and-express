@@ -80,10 +80,14 @@ async function main() {
       throw new Error(`Department not found for ${cat.name}`);
     }
 
-    const created = await prisma.category.create({
-      data: {
+    const slug = cat.name.toLowerCase().replace(/\s+/g, "-");
+
+    const created = await prisma.category.upsert({
+      where: { slug },
+      update: {},
+      create: {
         name: cat.name,
-        slug: cat.name.toLowerCase().replace(/\s+/g, "-"), // ✅ FIX
+        slug,
         departmentId: dept.id,
       },
     });
@@ -139,7 +143,7 @@ async function main() {
       create: {
         name: prod.name,
         slug: prod.slug,
-        description: `${prod.name} description`,
+        description: {},
         departmentId: category.departmentId,
         categoryId: category.id,
         status: "active",
@@ -153,15 +157,21 @@ async function main() {
     // =========================
     // PRODUCT IMAGES
     // =========================
-    await prisma.productImage.create({
-      data: {
-        productId: createdProduct.id,
-        imageUrl: `https://via.placeholder.com/300?text=${encodeURIComponent(prod.name)}`,
-        imageCldPubId: `seed_${prod.slug}`,
-        imageAltText: `${prod.name} image`,
-        isPrimary: true,
-      },
+    const existingImage = await prisma.productImage.findFirst({
+      where: { productId: createdProduct.id, isPrimary: true },
     });
+
+    if (!existingImage) {
+      await prisma.productImage.create({
+        data: {
+          productId: createdProduct.id,
+          imageUrl: `https://via.placeholder.com/300?text=${encodeURIComponent(prod.name)}`,
+          imageCldPubId: `seed_${prod.slug}`,
+          imageAltText: `${prod.name} image`,
+          isPrimary: true,
+        },
+      });
+    }
 
     console.log("✅ Product created:", createdProduct.name);
   }

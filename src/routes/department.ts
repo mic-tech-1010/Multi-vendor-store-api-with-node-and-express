@@ -61,6 +61,15 @@ router.get("/:id", async (req, res) => {
 
     const department = await prisma.department.findUnique({
       where: { id: Number(id) },
+      include: {
+        categories: {
+          select: {
+            name: true,
+            id: true,
+            slug: true,
+          },
+        },
+      },
     });
 
     if (!department) {
@@ -123,7 +132,7 @@ router.patch("/:id", async (req, res) => {
     const existingDepartment = await prisma.department.findUnique({
       where: { id: Number(id) },
     });
-    
+
 
     if (!existingDepartment) {
       return res.status(404).json({ message: "Department not found" });

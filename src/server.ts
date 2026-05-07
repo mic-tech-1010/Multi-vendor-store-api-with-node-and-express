@@ -8,6 +8,7 @@ import productrouter from '#routes/product.js';
 import userRouter from '#routes/user.js';
 import departmentRouter from '#routes/department.js';
 import categoryRouter from '#routes/category.js';
+import cloudinaryRouter from '#routes/cloudinary.js';
 
 const app: Express = express();
 
@@ -37,6 +38,8 @@ app.use('/api/users', userRouter);
 app.use('/api/departments', departmentRouter);
 
 app.use('/api/categories', categoryRouter);
+
+app.use('/api/cloudinary', cloudinaryRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 

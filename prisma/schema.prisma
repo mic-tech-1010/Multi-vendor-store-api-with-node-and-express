@@ -85,7 +85,7 @@ model Product {
   id             Int       @id @default(autoincrement())
   name           String  
   slug           String    @unique
-  description    String
+  description    Json      @db.JsonB
   images         ProductImage[]
   departmentId   Int
   department     Department @relation(fields: [departmentId], references: [id])

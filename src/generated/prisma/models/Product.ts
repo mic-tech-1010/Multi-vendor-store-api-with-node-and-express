@@ -46,7 +46,6 @@ export type ProductMinAggregateOutputType = {
   id: number | null
   name: string | null
   slug: string | null
-  description: string | null
   departmentId: number | null
   categoryId: number | null
   status: string | null
@@ -66,7 +65,6 @@ export type ProductMaxAggregateOutputType = {
   id: number | null
   name: string | null
   slug: string | null
-  description: string | null
   departmentId: number | null
   categoryId: number | null
   status: string | null
@@ -124,7 +122,6 @@ export type ProductMinAggregateInputType = {
   id?: true
   name?: true
   slug?: true
-  description?: true
   departmentId?: true
   categoryId?: true
   status?: true
@@ -144,7 +141,6 @@ export type ProductMaxAggregateInputType = {
   id?: true
   name?: true
   slug?: true
-  description?: true
   departmentId?: true
   categoryId?: true
   status?: true
@@ -271,7 +267,7 @@ export type ProductGroupByOutputType = {
   id: number
   name: string
   slug: string
-  description: string
+  description: runtime.JsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -314,7 +310,7 @@ export type ProductWhereInput = {
   id?: Prisma.IntFilter<"Product"> | number
   name?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
-  description?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.JsonFilter<"Product">
   departmentId?: Prisma.IntFilter<"Product"> | number
   categoryId?: Prisma.IntFilter<"Product"> | number
   status?: Prisma.StringFilter<"Product"> | string
@@ -367,7 +363,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
-  description?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.JsonFilter<"Product">
   departmentId?: Prisma.IntFilter<"Product"> | number
   categoryId?: Prisma.IntFilter<"Product"> | number
   status?: Prisma.StringFilter<"Product"> | string
@@ -420,7 +416,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Product"> | number
   name?: Prisma.StringWithAggregatesFilter<"Product"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  description?: Prisma.JsonWithAggregatesFilter<"Product">
   departmentId?: Prisma.IntWithAggregatesFilter<"Product"> | number
   categoryId?: Prisma.IntWithAggregatesFilter<"Product"> | number
   status?: Prisma.StringWithAggregatesFilter<"Product"> | string
@@ -439,7 +435,7 @@ export type ProductScalarWhereWithAggregatesInput = {
 export type ProductCreateInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -460,7 +456,7 @@ export type ProductUncheckedCreateInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -480,7 +476,7 @@ export type ProductUncheckedCreateInput = {
 export type ProductUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -501,7 +497,7 @@ export type ProductUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -522,7 +518,7 @@ export type ProductCreateManyInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -541,7 +537,7 @@ export type ProductCreateManyInput = {
 export type ProductUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -557,7 +553,7 @@ export type ProductUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -615,7 +611,6 @@ export type ProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -635,7 +630,6 @@ export type ProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -857,7 +851,7 @@ export type ProductUpdateOneRequiredWithoutImagesNestedInput = {
 export type ProductCreateWithoutCreatedByUserInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -877,7 +871,7 @@ export type ProductUncheckedCreateWithoutCreatedByUserInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -906,7 +900,7 @@ export type ProductCreateManyCreatedByUserInputEnvelope = {
 export type ProductCreateWithoutUpdatedByUserInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -926,7 +920,7 @@ export type ProductUncheckedCreateWithoutUpdatedByUserInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -975,7 +969,7 @@ export type ProductScalarWhereInput = {
   id?: Prisma.IntFilter<"Product"> | number
   name?: Prisma.StringFilter<"Product"> | string
   slug?: Prisma.StringFilter<"Product"> | string
-  description?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.JsonFilter<"Product">
   departmentId?: Prisma.IntFilter<"Product"> | number
   categoryId?: Prisma.IntFilter<"Product"> | number
   status?: Prisma.StringFilter<"Product"> | string
@@ -1010,7 +1004,7 @@ export type ProductUpdateManyWithWhereWithoutUpdatedByUserInput = {
 export type ProductCreateWithoutDepartmentInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -1030,7 +1024,7 @@ export type ProductUncheckedCreateWithoutDepartmentInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   categoryId: number
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1075,7 +1069,7 @@ export type ProductUpdateManyWithWhereWithoutDepartmentInput = {
 export type ProductCreateWithoutCategoryInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -1095,7 +1089,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1140,7 +1134,7 @@ export type ProductUpdateManyWithWhereWithoutCategoryInput = {
 export type ProductCreateWithoutImagesInput = {
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: number | null
@@ -1160,7 +1154,7 @@ export type ProductUncheckedCreateWithoutImagesInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -1195,7 +1189,7 @@ export type ProductUpdateToOneWithWhereWithoutImagesInput = {
 export type ProductUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1215,7 +1209,7 @@ export type ProductUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1235,7 +1229,7 @@ export type ProductCreateManyCreatedByUserInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -1254,7 +1248,7 @@ export type ProductCreateManyUpdatedByUserInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   categoryId: number
   status: string
@@ -1272,7 +1266,7 @@ export type ProductCreateManyUpdatedByUserInput = {
 export type ProductUpdateWithoutCreatedByUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1292,7 +1286,7 @@ export type ProductUncheckedUpdateWithoutCreatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1312,7 +1306,7 @@ export type ProductUncheckedUpdateManyWithoutCreatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1330,7 +1324,7 @@ export type ProductUncheckedUpdateManyWithoutCreatedByUserInput = {
 export type ProductUpdateWithoutUpdatedByUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1350,7 +1344,7 @@ export type ProductUncheckedUpdateWithoutUpdatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1370,7 +1364,7 @@ export type ProductUncheckedUpdateManyWithoutUpdatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1389,7 +1383,7 @@ export type ProductCreateManyDepartmentInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   categoryId: number
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1407,7 +1401,7 @@ export type ProductCreateManyDepartmentInput = {
 export type ProductUpdateWithoutDepartmentInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1427,7 +1421,7 @@ export type ProductUncheckedUpdateWithoutDepartmentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1447,7 +1441,7 @@ export type ProductUncheckedUpdateManyWithoutDepartmentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1466,7 +1460,7 @@ export type ProductCreateManyCategoryInput = {
   id?: number
   name: string
   slug: string
-  description: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId: number
   status: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1484,7 +1478,7 @@ export type ProductCreateManyCategoryInput = {
 export type ProductUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1504,7 +1498,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1524,7 +1518,7 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   departmentId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1699,7 +1693,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: number
     name: string
     slug: string
-    description: string
+    description: runtime.JsonValue
     departmentId: number
     categoryId: number
     status: string
@@ -2144,7 +2138,7 @@ export interface ProductFieldRefs {
   readonly id: Prisma.FieldRef<"Product", 'Int'>
   readonly name: Prisma.FieldRef<"Product", 'String'>
   readonly slug: Prisma.FieldRef<"Product", 'String'>
-  readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly description: Prisma.FieldRef<"Product", 'Json'>
   readonly departmentId: Prisma.FieldRef<"Product", 'Int'>
   readonly categoryId: Prisma.FieldRef<"Product", 'Int'>
   readonly status: Prisma.FieldRef<"Product", 'String'>

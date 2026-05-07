@@ -84,6 +84,11 @@ router.get("/:id", async (req, res) => {
         department: true,
         parent: true,
         children: true,
+        products: {
+          include: {
+            images: true,
+          },
+        },
       },
     });
 
@@ -126,13 +131,11 @@ router.post("/", async (req, res) => {
         metaDescription,
         bannerUrl,
         bannerCldPubId,
-
-        // 🧠 safe handling for optional relation
+        //safe handling for optional relation
         parentId:
           parentId && parentId !== ""
             ? Number(parentId)
             : null,
-
         departmentId: Number(departmentId),
       },
     });
