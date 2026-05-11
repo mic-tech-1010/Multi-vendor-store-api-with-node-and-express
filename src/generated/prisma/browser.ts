@@ -43,6 +43,26 @@ export type Product = Prisma.ProductModel
  */
 export type ProductImage = Prisma.ProductImageModel
 /**
+ * Model ProductAttribute
+ * 
+ */
+export type ProductAttribute = Prisma.ProductAttributeModel
+/**
+ * Model ProductAttributeValue
+ * 
+ */
+export type ProductAttributeValue = Prisma.ProductAttributeValueModel
+/**
+ * Model ProductSku
+ * 
+ */
+export type ProductSku = Prisma.ProductSkuModel
+/**
+ * Model ProductSkuAttributeValue
+ * 
+ */
+export type ProductSkuAttributeValue = Prisma.ProductSkuAttributeValueModel
+/**
  * Model Session
  * 
  */

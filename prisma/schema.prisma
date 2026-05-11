@@ -102,8 +102,11 @@ model Product {
   updatedBy      String   @db.Text
   updatedByUser  User      @relation("ProductUpdatedBy", fields: [updatedBy], references: [id])
   deletedAt      DateTime?
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  attributes      ProductAttribute[]
+  skus            ProductSku[]
 
   @@index([status])
   @@index([hasVariations])
@@ -124,6 +127,47 @@ model ProductImage {
   order           Int      @default(0)     // for sorting
 
   createdAt       DateTime @default(now())
+}
+
+model ProductAttribute {
+  id         Int       @id @default(autoincrement())
+  productId  Int
+  product    Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name       String
+  type       String
+  values     ProductAttributeValue[]
+
+  @@unique([productId, name])
+}
+
+model ProductAttributeValue {
+  id                  Int                    @id @default(autoincrement())
+  productAttributeId  Int
+  productAttribute    ProductAttribute       @relation(fields: [productAttributeId], references: [id], onDelete: Cascade)
+  value               String
+  skuAttributeValues  ProductSkuAttributeValue[]
+}
+
+model ProductSku {
+  id                  Int                    @id @default(autoincrement())
+  productId           Int
+  product             Product                @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku                 String                 @unique
+  price               Decimal                @db.Decimal(20, 4)
+  quantity            Int
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  attributeValues     ProductSkuAttributeValue[]
+}
+
+model ProductSkuAttributeValue {
+  id                         Int                    @id @default(autoincrement())
+  productSkuId               Int
+  productSku                 ProductSku             @relation(fields: [productSkuId], references: [id], onDelete: Cascade)
+  productAttributeValueId    Int
+  productAttributeValue      ProductAttributeValue  @relation(fields: [productAttributeValueId], references: [id], onDelete: Cascade)
+
+  @@unique([productSkuId, productAttributeValueId])
 }
 
 model Session {
