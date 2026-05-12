@@ -207,6 +207,49 @@ router.post("/", async (req, res) => {
     }
 });
 
+// toggle variations
+router.patch(
+    "/:id/toggle-variations",
+    async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const {
+                hasVariations,
+            } = req.body;
+
+            const product =
+                await prisma.product.update({
+                    where: {
+                        id: Number(id),
+                    },
+
+                    data: {
+                        hasVariations,
+                    },
+                });
+
+            // future logic
+            if (!hasVariations) {
+                // delete skus
+                // delete combinations
+                // delete inventories
+            }
+
+            res.status(200).json({
+                data: product,
+            });
+        } catch (error) {
+            console.error(error);
+
+            res.status(500).json({
+                message:
+                    "Failed to toggle variations",
+            });
+        }
+    }
+);
+
 // update a product
 router.patch("/:id", async (req, res) => {
     try {
