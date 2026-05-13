@@ -393,7 +393,6 @@ export const ModelName = {
   ProductAttributeValue: 'ProductAttributeValue',
   ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
-  ProductSkuAttributeValue: 'ProductSkuAttributeValue',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -412,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productAttributeValueImage" | "productSku" | "productSkuAttributeValue" | "session" | "account" | "verification"
+    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productAttributeValueImage" | "productSku" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1082,80 +1081,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ProductSkuAttributeValue: {
-      payload: Prisma.$ProductSkuAttributeValuePayload<ExtArgs>
-      fields: Prisma.ProductSkuAttributeValueFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ProductSkuAttributeValueFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ProductSkuAttributeValueFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        findFirst: {
-          args: Prisma.ProductSkuAttributeValueFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ProductSkuAttributeValueFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        findMany: {
-          args: Prisma.ProductSkuAttributeValueFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>[]
-        }
-        create: {
-          args: Prisma.ProductSkuAttributeValueCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        createMany: {
-          args: Prisma.ProductSkuAttributeValueCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ProductSkuAttributeValueCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>[]
-        }
-        delete: {
-          args: Prisma.ProductSkuAttributeValueDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        update: {
-          args: Prisma.ProductSkuAttributeValueUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        deleteMany: {
-          args: Prisma.ProductSkuAttributeValueDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ProductSkuAttributeValueUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ProductSkuAttributeValueUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>[]
-        }
-        upsert: {
-          args: Prisma.ProductSkuAttributeValueUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSkuAttributeValuePayload>
-        }
-        aggregate: {
-          args: Prisma.ProductSkuAttributeValueAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProductSkuAttributeValue>
-        }
-        groupBy: {
-          args: Prisma.ProductSkuAttributeValueGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductSkuAttributeValueGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ProductSkuAttributeValueCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductSkuAttributeValueCountAggregateOutputType> | number
-        }
-      }
-    }
     Session: {
       payload: Prisma.$SessionPayload<ExtArgs>
       fields: Prisma.SessionFieldRefs
@@ -1553,15 +1478,6 @@ export const ProductSkuScalarFieldEnum = {
 export type ProductSkuScalarFieldEnum = (typeof ProductSkuScalarFieldEnum)[keyof typeof ProductSkuScalarFieldEnum]
 
 
-export const ProductSkuAttributeValueScalarFieldEnum = {
-  id: 'id',
-  productSkuId: 'productSkuId',
-  productAttributeValueId: 'productAttributeValueId'
-} as const
-
-export type ProductSkuAttributeValueScalarFieldEnum = (typeof ProductSkuAttributeValueScalarFieldEnum)[keyof typeof ProductSkuAttributeValueScalarFieldEnum]
-
-
 export const SessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1861,7 +1777,6 @@ export type GlobalOmitConfig = {
   productAttributeValue?: Prisma.ProductAttributeValueOmit
   productAttributeValueImage?: Prisma.ProductAttributeValueImageOmit
   productSku?: Prisma.ProductSkuOmit
-  productSkuAttributeValue?: Prisma.ProductSkuAttributeValueOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

@@ -87,11 +87,6 @@ export type ProductAttributeValueImage = Prisma.ProductAttributeValueImageModel
  */
 export type ProductSku = Prisma.ProductSkuModel
 /**
- * Model ProductSkuAttributeValue
- * 
- */
-export type ProductSkuAttributeValue = Prisma.ProductSkuAttributeValueModel
-/**
  * Model Session
  * 
  */

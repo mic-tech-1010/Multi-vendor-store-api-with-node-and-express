@@ -146,7 +146,7 @@ model ProductAttributeValue {
   productAttribute    ProductAttribute       @relation(fields: [productAttributeId], references: [id], onDelete: Cascade)
   value               String
   images         ProductAttributeValueImage[]
-  skuAttributeValues  ProductSkuAttributeValue[]
+  skus           ProductSku[]
 }
 
 model ProductAttributeValueImage {
@@ -176,17 +176,7 @@ model ProductSku {
   quantity            Int
   createdAt           DateTime               @default(now())
   updatedAt           DateTime               @updatedAt
-  attributeValues     ProductSkuAttributeValue[]
-}
-
-model ProductSkuAttributeValue {
-  id                         Int                    @id @default(autoincrement())
-  productSkuId               Int
-  productSku                 ProductSku             @relation(fields: [productSkuId], references: [id], onDelete: Cascade)
-  productAttributeValueId    Int
-  productAttributeValue      ProductAttributeValue  @relation(fields: [productAttributeValueId], references: [id], onDelete: Cascade)
-
-  @@unique([productSkuId, productAttributeValueId])
+  attributeValues     ProductAttributeValue[]
 }
 
 model Session {

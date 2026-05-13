@@ -60,7 +60,6 @@ export const ModelName = {
   ProductAttributeValue: 'ProductAttributeValue',
   ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
-  ProductSkuAttributeValue: 'ProductSkuAttributeValue',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -216,15 +215,6 @@ export const ProductSkuScalarFieldEnum = {
 } as const
 
 export type ProductSkuScalarFieldEnum = (typeof ProductSkuScalarFieldEnum)[keyof typeof ProductSkuScalarFieldEnum]
-
-
-export const ProductSkuAttributeValueScalarFieldEnum = {
-  id: 'id',
-  productSkuId: 'productSkuId',
-  productAttributeValueId: 'productAttributeValueId'
-} as const
-
-export type ProductSkuAttributeValueScalarFieldEnum = (typeof ProductSkuAttributeValueScalarFieldEnum)[keyof typeof ProductSkuAttributeValueScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

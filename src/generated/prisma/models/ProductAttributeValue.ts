@@ -206,7 +206,7 @@ export type ProductAttributeValueWhereInput = {
   value?: Prisma.StringFilter<"ProductAttributeValue"> | string
   productAttribute?: Prisma.XOR<Prisma.ProductAttributeScalarRelationFilter, Prisma.ProductAttributeWhereInput>
   images?: Prisma.ProductAttributeValueImageListRelationFilter
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueListRelationFilter
+  skus?: Prisma.ProductSkuListRelationFilter
 }
 
 export type ProductAttributeValueOrderByWithRelationInput = {
@@ -215,7 +215,7 @@ export type ProductAttributeValueOrderByWithRelationInput = {
   value?: Prisma.SortOrder
   productAttribute?: Prisma.ProductAttributeOrderByWithRelationInput
   images?: Prisma.ProductAttributeValueImageOrderByRelationAggregateInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueOrderByRelationAggregateInput
+  skus?: Prisma.ProductSkuOrderByRelationAggregateInput
 }
 
 export type ProductAttributeValueWhereUniqueInput = Prisma.AtLeast<{
@@ -227,7 +227,7 @@ export type ProductAttributeValueWhereUniqueInput = Prisma.AtLeast<{
   value?: Prisma.StringFilter<"ProductAttributeValue"> | string
   productAttribute?: Prisma.XOR<Prisma.ProductAttributeScalarRelationFilter, Prisma.ProductAttributeWhereInput>
   images?: Prisma.ProductAttributeValueImageListRelationFilter
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueListRelationFilter
+  skus?: Prisma.ProductSkuListRelationFilter
 }, "id">
 
 export type ProductAttributeValueOrderByWithAggregationInput = {
@@ -254,7 +254,7 @@ export type ProductAttributeValueCreateInput = {
   value: string
   productAttribute: Prisma.ProductAttributeCreateNestedOneWithoutValuesInput
   images?: Prisma.ProductAttributeValueImageCreateNestedManyWithoutProductAttributeValueInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueUncheckedCreateInput = {
@@ -262,14 +262,14 @@ export type ProductAttributeValueUncheckedCreateInput = {
   productAttributeId: number
   value: string
   images?: Prisma.ProductAttributeValueImageUncheckedCreateNestedManyWithoutProductAttributeValueInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueUpdateInput = {
   value?: Prisma.StringFieldUpdateOperationsInput | string
   productAttribute?: Prisma.ProductAttributeUpdateOneRequiredWithoutValuesNestedInput
   images?: Prisma.ProductAttributeValueImageUpdateManyWithoutProductAttributeValueNestedInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUpdateManyWithoutAttributeValuesNestedInput
 }
 
 export type ProductAttributeValueUncheckedUpdateInput = {
@@ -277,7 +277,7 @@ export type ProductAttributeValueUncheckedUpdateInput = {
   productAttributeId?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductAttributeValueImageUncheckedUpdateManyWithoutProductAttributeValueNestedInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutAttributeValuesNestedInput
 }
 
 export type ProductAttributeValueCreateManyInput = {
@@ -395,31 +395,55 @@ export type ProductAttributeValueUpdateOneRequiredWithoutImagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductAttributeValueUpdateToOneWithWhereWithoutImagesInput, Prisma.ProductAttributeValueUpdateWithoutImagesInput>, Prisma.ProductAttributeValueUncheckedUpdateWithoutImagesInput>
 }
 
-export type ProductAttributeValueCreateNestedOneWithoutSkuAttributeValuesInput = {
-  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkuAttributeValuesInput>
-  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkuAttributeValuesInput
-  connect?: Prisma.ProductAttributeValueWhereUniqueInput
+export type ProductAttributeValueCreateNestedManyWithoutSkusInput = {
+  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput> | Prisma.ProductAttributeValueCreateWithoutSkusInput[] | Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput[]
+  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput | Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput[]
+  connect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
 }
 
-export type ProductAttributeValueUpdateOneRequiredWithoutSkuAttributeValuesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkuAttributeValuesInput>
-  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkuAttributeValuesInput
-  upsert?: Prisma.ProductAttributeValueUpsertWithoutSkuAttributeValuesInput
-  connect?: Prisma.ProductAttributeValueWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductAttributeValueUpdateToOneWithWhereWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUpdateWithoutSkuAttributeValuesInput>, Prisma.ProductAttributeValueUncheckedUpdateWithoutSkuAttributeValuesInput>
+export type ProductAttributeValueUncheckedCreateNestedManyWithoutSkusInput = {
+  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput> | Prisma.ProductAttributeValueCreateWithoutSkusInput[] | Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput[]
+  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput | Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput[]
+  connect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+}
+
+export type ProductAttributeValueUpdateManyWithoutSkusNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput> | Prisma.ProductAttributeValueCreateWithoutSkusInput[] | Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput[]
+  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput | Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput[]
+  upsert?: Prisma.ProductAttributeValueUpsertWithWhereUniqueWithoutSkusInput | Prisma.ProductAttributeValueUpsertWithWhereUniqueWithoutSkusInput[]
+  set?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  disconnect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  delete?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  connect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  update?: Prisma.ProductAttributeValueUpdateWithWhereUniqueWithoutSkusInput | Prisma.ProductAttributeValueUpdateWithWhereUniqueWithoutSkusInput[]
+  updateMany?: Prisma.ProductAttributeValueUpdateManyWithWhereWithoutSkusInput | Prisma.ProductAttributeValueUpdateManyWithWhereWithoutSkusInput[]
+  deleteMany?: Prisma.ProductAttributeValueScalarWhereInput | Prisma.ProductAttributeValueScalarWhereInput[]
+}
+
+export type ProductAttributeValueUncheckedUpdateManyWithoutSkusNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput> | Prisma.ProductAttributeValueCreateWithoutSkusInput[] | Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput[]
+  connectOrCreate?: Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput | Prisma.ProductAttributeValueCreateOrConnectWithoutSkusInput[]
+  upsert?: Prisma.ProductAttributeValueUpsertWithWhereUniqueWithoutSkusInput | Prisma.ProductAttributeValueUpsertWithWhereUniqueWithoutSkusInput[]
+  set?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  disconnect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  delete?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  connect?: Prisma.ProductAttributeValueWhereUniqueInput | Prisma.ProductAttributeValueWhereUniqueInput[]
+  update?: Prisma.ProductAttributeValueUpdateWithWhereUniqueWithoutSkusInput | Prisma.ProductAttributeValueUpdateWithWhereUniqueWithoutSkusInput[]
+  updateMany?: Prisma.ProductAttributeValueUpdateManyWithWhereWithoutSkusInput | Prisma.ProductAttributeValueUpdateManyWithWhereWithoutSkusInput[]
+  deleteMany?: Prisma.ProductAttributeValueScalarWhereInput | Prisma.ProductAttributeValueScalarWhereInput[]
 }
 
 export type ProductAttributeValueCreateWithoutProductAttributeInput = {
   value: string
   images?: Prisma.ProductAttributeValueImageCreateNestedManyWithoutProductAttributeValueInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueUncheckedCreateWithoutProductAttributeInput = {
   id?: number
   value: string
   images?: Prisma.ProductAttributeValueImageUncheckedCreateNestedManyWithoutProductAttributeValueInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueCreateOrConnectWithoutProductAttributeInput = {
@@ -460,14 +484,14 @@ export type ProductAttributeValueScalarWhereInput = {
 export type ProductAttributeValueCreateWithoutImagesInput = {
   value: string
   productAttribute: Prisma.ProductAttributeCreateNestedOneWithoutValuesInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueUncheckedCreateWithoutImagesInput = {
   id?: number
   productAttributeId: number
   value: string
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedCreateNestedManyWithoutProductAttributeValueInput
+  skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutAttributeValuesInput
 }
 
 export type ProductAttributeValueCreateOrConnectWithoutImagesInput = {
@@ -489,56 +513,48 @@ export type ProductAttributeValueUpdateToOneWithWhereWithoutImagesInput = {
 export type ProductAttributeValueUpdateWithoutImagesInput = {
   value?: Prisma.StringFieldUpdateOperationsInput | string
   productAttribute?: Prisma.ProductAttributeUpdateOneRequiredWithoutValuesNestedInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUpdateManyWithoutAttributeValuesNestedInput
 }
 
 export type ProductAttributeValueUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   productAttributeId?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutAttributeValuesNestedInput
 }
 
-export type ProductAttributeValueCreateWithoutSkuAttributeValuesInput = {
+export type ProductAttributeValueCreateWithoutSkusInput = {
   value: string
   productAttribute: Prisma.ProductAttributeCreateNestedOneWithoutValuesInput
   images?: Prisma.ProductAttributeValueImageCreateNestedManyWithoutProductAttributeValueInput
 }
 
-export type ProductAttributeValueUncheckedCreateWithoutSkuAttributeValuesInput = {
+export type ProductAttributeValueUncheckedCreateWithoutSkusInput = {
   id?: number
   productAttributeId: number
   value: string
   images?: Prisma.ProductAttributeValueImageUncheckedCreateNestedManyWithoutProductAttributeValueInput
 }
 
-export type ProductAttributeValueCreateOrConnectWithoutSkuAttributeValuesInput = {
+export type ProductAttributeValueCreateOrConnectWithoutSkusInput = {
   where: Prisma.ProductAttributeValueWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkuAttributeValuesInput>
+  create: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput>
 }
 
-export type ProductAttributeValueUpsertWithoutSkuAttributeValuesInput = {
-  update: Prisma.XOR<Prisma.ProductAttributeValueUpdateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedUpdateWithoutSkuAttributeValuesInput>
-  create: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkuAttributeValuesInput>
-  where?: Prisma.ProductAttributeValueWhereInput
+export type ProductAttributeValueUpsertWithWhereUniqueWithoutSkusInput = {
+  where: Prisma.ProductAttributeValueWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProductAttributeValueUpdateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedUpdateWithoutSkusInput>
+  create: Prisma.XOR<Prisma.ProductAttributeValueCreateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedCreateWithoutSkusInput>
 }
 
-export type ProductAttributeValueUpdateToOneWithWhereWithoutSkuAttributeValuesInput = {
-  where?: Prisma.ProductAttributeValueWhereInput
-  data: Prisma.XOR<Prisma.ProductAttributeValueUpdateWithoutSkuAttributeValuesInput, Prisma.ProductAttributeValueUncheckedUpdateWithoutSkuAttributeValuesInput>
+export type ProductAttributeValueUpdateWithWhereUniqueWithoutSkusInput = {
+  where: Prisma.ProductAttributeValueWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProductAttributeValueUpdateWithoutSkusInput, Prisma.ProductAttributeValueUncheckedUpdateWithoutSkusInput>
 }
 
-export type ProductAttributeValueUpdateWithoutSkuAttributeValuesInput = {
-  value?: Prisma.StringFieldUpdateOperationsInput | string
-  productAttribute?: Prisma.ProductAttributeUpdateOneRequiredWithoutValuesNestedInput
-  images?: Prisma.ProductAttributeValueImageUpdateManyWithoutProductAttributeValueNestedInput
-}
-
-export type ProductAttributeValueUncheckedUpdateWithoutSkuAttributeValuesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  productAttributeId?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.StringFieldUpdateOperationsInput | string
-  images?: Prisma.ProductAttributeValueImageUncheckedUpdateManyWithoutProductAttributeValueNestedInput
+export type ProductAttributeValueUpdateManyWithWhereWithoutSkusInput = {
+  where: Prisma.ProductAttributeValueScalarWhereInput
+  data: Prisma.XOR<Prisma.ProductAttributeValueUpdateManyMutationInput, Prisma.ProductAttributeValueUncheckedUpdateManyWithoutSkusInput>
 }
 
 export type ProductAttributeValueCreateManyProductAttributeInput = {
@@ -549,18 +565,37 @@ export type ProductAttributeValueCreateManyProductAttributeInput = {
 export type ProductAttributeValueUpdateWithoutProductAttributeInput = {
   value?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductAttributeValueImageUpdateManyWithoutProductAttributeValueNestedInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUpdateManyWithoutAttributeValuesNestedInput
 }
 
 export type ProductAttributeValueUncheckedUpdateWithoutProductAttributeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductAttributeValueImageUncheckedUpdateManyWithoutProductAttributeValueNestedInput
-  skuAttributeValues?: Prisma.ProductSkuAttributeValueUncheckedUpdateManyWithoutProductAttributeValueNestedInput
+  skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutAttributeValuesNestedInput
 }
 
 export type ProductAttributeValueUncheckedUpdateManyWithoutProductAttributeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ProductAttributeValueUpdateWithoutSkusInput = {
+  value?: Prisma.StringFieldUpdateOperationsInput | string
+  productAttribute?: Prisma.ProductAttributeUpdateOneRequiredWithoutValuesNestedInput
+  images?: Prisma.ProductAttributeValueImageUpdateManyWithoutProductAttributeValueNestedInput
+}
+
+export type ProductAttributeValueUncheckedUpdateWithoutSkusInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  productAttributeId?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.ProductAttributeValueImageUncheckedUpdateManyWithoutProductAttributeValueNestedInput
+}
+
+export type ProductAttributeValueUncheckedUpdateManyWithoutSkusInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  productAttributeId?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -571,12 +606,12 @@ export type ProductAttributeValueUncheckedUpdateManyWithoutProductAttributeInput
 
 export type ProductAttributeValueCountOutputType = {
   images: number
-  skuAttributeValues: number
+  skus: number
 }
 
 export type ProductAttributeValueCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | ProductAttributeValueCountOutputTypeCountImagesArgs
-  skuAttributeValues?: boolean | ProductAttributeValueCountOutputTypeCountSkuAttributeValuesArgs
+  skus?: boolean | ProductAttributeValueCountOutputTypeCountSkusArgs
 }
 
 /**
@@ -599,8 +634,8 @@ export type ProductAttributeValueCountOutputTypeCountImagesArgs<ExtArgs extends 
 /**
  * ProductAttributeValueCountOutputType without action
  */
-export type ProductAttributeValueCountOutputTypeCountSkuAttributeValuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductSkuAttributeValueWhereInput
+export type ProductAttributeValueCountOutputTypeCountSkusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductSkuWhereInput
 }
 
 
@@ -610,7 +645,7 @@ export type ProductAttributeValueSelect<ExtArgs extends runtime.Types.Extensions
   value?: boolean
   productAttribute?: boolean | Prisma.ProductAttributeDefaultArgs<ExtArgs>
   images?: boolean | Prisma.ProductAttributeValue$imagesArgs<ExtArgs>
-  skuAttributeValues?: boolean | Prisma.ProductAttributeValue$skuAttributeValuesArgs<ExtArgs>
+  skus?: boolean | Prisma.ProductAttributeValue$skusArgs<ExtArgs>
   _count?: boolean | Prisma.ProductAttributeValueCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productAttributeValue"]>
 
@@ -638,7 +673,7 @@ export type ProductAttributeValueOmit<ExtArgs extends runtime.Types.Extensions.I
 export type ProductAttributeValueInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productAttribute?: boolean | Prisma.ProductAttributeDefaultArgs<ExtArgs>
   images?: boolean | Prisma.ProductAttributeValue$imagesArgs<ExtArgs>
-  skuAttributeValues?: boolean | Prisma.ProductAttributeValue$skuAttributeValuesArgs<ExtArgs>
+  skus?: boolean | Prisma.ProductAttributeValue$skusArgs<ExtArgs>
   _count?: boolean | Prisma.ProductAttributeValueCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductAttributeValueIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -653,7 +688,7 @@ export type $ProductAttributeValuePayload<ExtArgs extends runtime.Types.Extensio
   objects: {
     productAttribute: Prisma.$ProductAttributePayload<ExtArgs>
     images: Prisma.$ProductAttributeValueImagePayload<ExtArgs>[]
-    skuAttributeValues: Prisma.$ProductSkuAttributeValuePayload<ExtArgs>[]
+    skus: Prisma.$ProductSkuPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1055,7 +1090,7 @@ export interface Prisma__ProductAttributeValueClient<T, Null = never, ExtArgs ex
   readonly [Symbol.toStringTag]: "PrismaPromise"
   productAttribute<T extends Prisma.ProductAttributeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductAttributeDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductAttributeClient<runtime.Types.Result.GetResult<Prisma.$ProductAttributePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   images<T extends Prisma.ProductAttributeValue$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductAttributeValue$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductAttributeValueImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  skuAttributeValues<T extends Prisma.ProductAttributeValue$skuAttributeValuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductAttributeValue$skuAttributeValuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSkuAttributeValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  skus<T extends Prisma.ProductAttributeValue$skusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductAttributeValue$skusArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSkuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1513,27 +1548,27 @@ export type ProductAttributeValue$imagesArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * ProductAttributeValue.skuAttributeValues
+ * ProductAttributeValue.skus
  */
-export type ProductAttributeValue$skuAttributeValuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ProductAttributeValue$skusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ProductSkuAttributeValue
+   * Select specific fields to fetch from the ProductSku
    */
-  select?: Prisma.ProductSkuAttributeValueSelect<ExtArgs> | null
+  select?: Prisma.ProductSkuSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ProductSkuAttributeValue
+   * Omit specific fields from the ProductSku
    */
-  omit?: Prisma.ProductSkuAttributeValueOmit<ExtArgs> | null
+  omit?: Prisma.ProductSkuOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProductSkuAttributeValueInclude<ExtArgs> | null
-  where?: Prisma.ProductSkuAttributeValueWhereInput
-  orderBy?: Prisma.ProductSkuAttributeValueOrderByWithRelationInput | Prisma.ProductSkuAttributeValueOrderByWithRelationInput[]
-  cursor?: Prisma.ProductSkuAttributeValueWhereUniqueInput
+  include?: Prisma.ProductSkuInclude<ExtArgs> | null
+  where?: Prisma.ProductSkuWhereInput
+  orderBy?: Prisma.ProductSkuOrderByWithRelationInput | Prisma.ProductSkuOrderByWithRelationInput[]
+  cursor?: Prisma.ProductSkuWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ProductSkuAttributeValueScalarFieldEnum | Prisma.ProductSkuAttributeValueScalarFieldEnum[]
+  distinct?: Prisma.ProductSkuScalarFieldEnum | Prisma.ProductSkuScalarFieldEnum[]
 }
 
 /**

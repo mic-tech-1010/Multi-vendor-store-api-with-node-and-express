@@ -24,11 +24,7 @@ export async function generateProductSkus(
 
         skus: {
           include: {
-            attributeValues: {
-              include: {
-                productAttributeValue: true,
-              },
-            },
+            attributeValues: true,
           },
         },
       },
@@ -85,7 +81,6 @@ export async function generateProductSkus(
       );
     });
 
-
   /*
   |--------------------------------------------------------------------------
   | STEP 3 — CARTESIAN PRODUCT
@@ -95,8 +90,12 @@ export async function generateProductSkus(
   const combinations =
     cartesianProduct(attributeValueSets);
 
+  /*
+  |--------------------------------------------------------------------------
+  | NORMALIZE COMBINATIONS
+  |--------------------------------------------------------------------------
+  */
 
-  // normalize combinations
   const desiredCombinations =
     combinations.map((combo) =>
       [...combo].sort((a, b) => a - b)
@@ -121,12 +120,16 @@ export async function generateProductSkus(
 
       for (const sku of product.skus) {
         const skuValueIds =
-          sku.attributeValues.map(
-            (item) =>
-              item.productAttributeValueId
-          );
+          sku.attributeValues
+            .map((item) => item.id)
+            .sort((a, b) => a - b);
 
-        // wrong number of attributes
+        /*
+        |--------------------------------------------------------------------------
+        | WRONG ATTRIBUTE COUNT
+        |--------------------------------------------------------------------------
+        */
+
         if (
           skuValueIds.length !==
           attributeCount
@@ -140,18 +143,18 @@ export async function generateProductSkus(
           continue;
         }
 
-        // invalid combination
-        const normalized =
-          [...skuValueIds].sort(
-            (a, b) => a - b
-          );
+        /*
+        |--------------------------------------------------------------------------
+        | INVALID COMBINATION
+        |--------------------------------------------------------------------------
+        */
 
         const exists =
           desiredCombinations.some(
             (combo) =>
               arraysEqual(
                 combo,
-                normalized
+                skuValueIds
               )
           );
 
@@ -181,13 +184,16 @@ export async function generateProductSkus(
           },
         });
 
+      /*
+      |--------------------------------------------------------------------------
+      | EXISTING COMBINATIONS
+      |--------------------------------------------------------------------------
+      */
+
       const existingCombinations =
         existingSkus.map((sku) =>
           sku.attributeValues
-            .map(
-              (v) =>
-                v.productAttributeValueId
-            )
+            .map((v) => v.id)
             .sort((a, b) => a - b)
         );
 
@@ -211,39 +217,28 @@ export async function generateProductSkus(
           continue;
         }
 
-        const sku =
-          await tx.productSku.create({
-            data: {
-              productId,
+        await tx.productSku.create({
+          data: {
+            productId,
 
-              sku: await generateSkuCode(
-                product.id,
-                combination
+            sku: await generateSkuCode(
+              product.id,
+              combination
+            ),
+
+            price: product.price,
+
+            quantity: 0,
+
+            attributeValues: {
+              connect: combination.map(
+                (id) => ({
+                  id,
+                })
               ),
-
-              price: product.price,
-
-              quantity: 0,
             },
-          });
-
-        const junctureTableData = combination.map(
-          (
-            productAttributeValueId
-          ) => ({
-            productSkuId: sku.id,
-
-            productAttributeValueId,
-          })
-        );
-
-
-
-        await tx.productSkuAttributeValue.createMany(
-          {
-            data: junctureTableData,
-          }
-        );
+          },
+        });
       }
     }
   );
@@ -251,7 +246,25 @@ export async function generateProductSkus(
 
 /*
 |--------------------------------------------------------------------------
-| HELPERS
+| CARTESIAN PRODUCT
+|--------------------------------------------------------------------------
+|
+| INPUT:
+|
+| [
+|   [1,2],
+|   [5,6]
+| ]
+|
+| OUTPUT:
+|
+| [
+|   [1,5],
+|   [1,6],
+|   [2,5],
+|   [2,6]
+| ]
+|
 |--------------------------------------------------------------------------
 */
 
@@ -263,23 +276,30 @@ function cartesianProduct(
   }
 
   return sets.reduce<number[][]>(
-    (acc, set) => {
+    (accumulator, currentSet) => {
       const result: number[][] = [];
 
-      for (const accItem of acc) {
-        for (const value of set) {
+      for (const accumulatorItem of accumulator) {
+        for (const currentValue of currentSet) {
           result.push([
-            ...accItem,
-            value,
+            ...accumulatorItem,
+            currentValue,
           ]);
         }
       }
 
       return result;
     },
+
     [[]]
   );
 }
+
+/*
+|--------------------------------------------------------------------------
+| ARRAY COMPARISON
+|--------------------------------------------------------------------------
+*/
 
 function arraysEqual(
   a: number[],
@@ -295,13 +315,25 @@ function arraysEqual(
   );
 }
 
+/*
+|--------------------------------------------------------------------------
+| HUMAN READABLE SKU GENERATOR
+|--------------------------------------------------------------------------
+|
+| Example:
+|
+| tshirt-red-small
+|
+|--------------------------------------------------------------------------
+*/
+
 async function generateSkuCode(
   productId: number,
   attributeValueIds: number[]
 ) {
   /*
   |--------------------------------------------------------------------------
-  | LOAD PRODUCT + ATTRIBUTE VALUES
+  | LOAD PRODUCT
   |--------------------------------------------------------------------------
   */
 
@@ -315,6 +347,12 @@ async function generateSkuCode(
         name: true,
       },
     });
+
+  /*
+  |--------------------------------------------------------------------------
+  | LOAD ATTRIBUTE VALUES
+  |--------------------------------------------------------------------------
+  */
 
   const attributeValues =
     await prisma.productAttributeValue.findMany({
@@ -331,19 +369,7 @@ async function generateSkuCode(
 
   /*
   |--------------------------------------------------------------------------
-  | BUILD HUMAN READABLE SKU
-  |--------------------------------------------------------------------------
-  |
-  | Example:
-  |
-  | T Shirt
-  | Red
-  | Small
-  |
-  | =>
-  |
-  | tshirt-red-small
-  |
+  | PRODUCT SLUG
   |--------------------------------------------------------------------------
   */
 
@@ -352,6 +378,12 @@ async function generateSkuCode(
       ?.toLowerCase()
       .replace(/[^a-z0-9\s]/g, "")
       .replace(/\s+/g, "-");
+
+  /*
+  |--------------------------------------------------------------------------
+  | ATTRIBUTE VALUE SLUG
+  |--------------------------------------------------------------------------
+  */
 
   const valueSlug =
     attributeValues
@@ -362,6 +394,12 @@ async function generateSkuCode(
           .replace(/\s+/g, "-")
       )
       .join("-");
+
+  /*
+  |--------------------------------------------------------------------------
+  | RESULT
+  |--------------------------------------------------------------------------
+  */
 
   return `${productSlug}-${valueSlug}`;
 }
