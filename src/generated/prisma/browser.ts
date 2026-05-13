@@ -53,6 +53,11 @@ export type ProductAttribute = Prisma.ProductAttributeModel
  */
 export type ProductAttributeValue = Prisma.ProductAttributeValueModel
 /**
+ * Model ProductAttributeValueImage
+ * 
+ */
+export type ProductAttributeValueImage = Prisma.ProductAttributeValueImageModel
+/**
  * Model ProductSku
  * 
  */

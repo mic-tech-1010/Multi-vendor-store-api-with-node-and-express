@@ -2,6 +2,7 @@ import express from 'express';
 import { prisma } from '../db/prisma';
 import validate from '#lib/validator.js';
 import { CreateProductSchema, UpdateProductSchema } from '#schemas/validation/productSchema.js';
+import { generateProductSkus } from '#services/product-sku-generator.js';
 
 const router = express.Router();
 
@@ -81,6 +82,19 @@ router.get("/:id", async (req, res) => {
                 department: true,
                 images: {
                     orderBy: { order: 'asc' }
+                },
+                attributes: {
+                    include: {
+                        values: {
+                            include: {
+                                images: {
+                                    orderBy: {
+                                        order: "asc",
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
                 createdByUser: {
                     select: { id: true, name: true, email: true }
@@ -206,6 +220,335 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Failed to create product" });
     }
 });
+
+// create or update product attributes
+// backend route
+
+router.put(
+    "/:id/attributes",
+    async (req, res) => {
+        try {
+            const productId = Number(
+                req.params.id
+            );
+
+            const {
+                productAttributes,
+            } = req.body;
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | PRODUCT
+            |--------------------------------------------------------------------------
+            */
+
+            const product =
+                await prisma.product.findUnique({
+                    where: {
+                        id: productId,
+                    },
+
+                    include: {
+                        attributes: {
+                            include: {
+                                values: {
+                                    include: {
+                                        images: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+
+            if (!product) {
+                return res.status(404).json({
+                    error: "Product not found",
+                });
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | TRANSACTION
+            |--------------------------------------------------------------------------
+            */
+
+            await prisma.$transaction(
+                async (tx) => {
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EXISTING ATTRIBUTES
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const existingAttributes =
+                        product.attributes;
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | DELETE REMOVED ATTRIBUTES
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const incomingAttributeIds =
+                        productAttributes
+                            .filter(
+                                (attr: any) => attr.id
+                            )
+                            .map(
+                                (attr: any) => attr.id
+                            );
+
+                    const attributesToDelete =
+                        existingAttributes.filter(
+                            (existing) =>
+                                !incomingAttributeIds.includes(
+                                    existing.id
+                                )
+                        );
+
+                    for (const attribute of attributesToDelete) {
+                        await tx.productAttribute.delete({
+                            where: {
+                                id: attribute.id,
+                            },
+                        });
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | UPSERT ATTRIBUTES
+                    |--------------------------------------------------------------------------
+                    */
+
+                    for (const incomingAttribute of productAttributes) {
+                        let attributeId =
+                            incomingAttribute.id;
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | UPDATE ATTRIBUTE
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (attributeId) {
+                            await tx.productAttribute.update({
+                                where: {
+                                    id: attributeId,
+                                },
+
+                                data: {
+                                    name:
+                                        incomingAttribute.name,
+
+                                    type:
+                                        incomingAttribute.type,
+                                },
+                            });
+                        }
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | CREATE ATTRIBUTE
+                        |--------------------------------------------------------------------------
+                        */
+
+                        else {
+                            const createdAttribute =
+                                await tx.productAttribute.create(
+                                    {
+                                        data: {
+                                            productId,
+
+                                            name:
+                                                incomingAttribute.name,
+
+                                            type:
+                                                incomingAttribute.type,
+                                        },
+                                    }
+                                );
+
+                            attributeId =
+                                createdAttribute.id;
+                        }
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | EXISTING VALUES
+                        |--------------------------------------------------------------------------
+                        */
+
+                        const existingAttribute =
+                            existingAttributes.find(
+                                (attr) =>
+                                    attr.id === attributeId
+                            );
+
+                        const existingValues =
+                            existingAttribute?.values ||
+                            [];
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | DELETE REMOVED VALUES
+                        |--------------------------------------------------------------------------
+                        */
+
+                        const incomingValueIds =
+                            incomingAttribute.options
+                                .filter(
+                                    (option: any) =>
+                                        option.id
+                                )
+                                .map(
+                                    (option: any) =>
+                                        option.id
+                                );
+
+                        const valuesToDelete =
+                            existingValues.filter(
+                                (existingValue) =>
+                                    !incomingValueIds.includes(
+                                        existingValue.id
+                                    )
+                            );
+
+                        for (const value of valuesToDelete) {
+                            await tx.productAttributeValue.delete(
+                                {
+                                    where: {
+                                        id: value.id,
+                                    },
+                                }
+                            );
+                        }
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | UPSERT VALUES
+                        |--------------------------------------------------------------------------
+                        */
+
+                        for (const option of incomingAttribute.options) {
+                            let valueId = option.id;
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | UPDATE VALUE
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if (valueId) {
+                                await tx.productAttributeValue.update(
+                                    {
+                                        where: {
+                                            id: valueId,
+                                        },
+
+                                        data: {
+                                            value:
+                                                option.value,
+                                        },
+                                    }
+                                );
+                            }
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | CREATE VALUE
+                            |--------------------------------------------------------------------------
+                            */
+
+                            else {
+                                const createdValue =
+                                    await tx.productAttributeValue.create(
+                                        {
+                                            data: {
+                                                productAttributeId:
+                                                    attributeId,
+
+                                                value:
+                                                    option.value,
+                                            },
+                                        }
+                                    );
+
+                                valueId =
+                                    createdValue.id;
+                            }
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | REPLACE IMAGES
+                            |--------------------------------------------------------------------------
+                            */
+
+                            await tx.productAttributeValueImage.deleteMany(
+                                {
+                                    where: {
+                                        productAttributeValueId:
+                                            valueId,
+                                    },
+                                }
+                            );
+
+                            if (
+                                option.images &&
+                                option.images.length > 0
+                            ) {
+                                await tx.productAttributeValueImage.createMany(
+                                    {
+                                        data:
+                                            option.images.map(
+                                                (
+                                                    image: any,
+                                                    index: number
+                                                ) => ({
+                                                    productAttributeValueId:
+                                                        valueId,
+
+                                                    imageUrl:
+                                                        image.url,
+
+                                                    imageCldPubId:
+                                                        image.publicId,
+
+                                                    imageAltText:
+                                                        option.value,
+
+                                                    order: index,
+
+                                                    isPrimary:
+                                                        index === 0,
+                                                })
+                                            ),
+                                    }
+                                );
+                            }
+                        }
+                    }
+                }
+            );
+
+            await generateProductSkus(productId);
+
+            return res.status(200).json({
+                message:
+                    "Attributes updated successfully",
+            });
+        } catch (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                error:
+                    "Failed to update product attributes",
+            });
+        }
+    }
+);
 
 // toggle variations
 router.patch(

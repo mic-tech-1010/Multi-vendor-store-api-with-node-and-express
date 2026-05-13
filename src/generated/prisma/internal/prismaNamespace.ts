@@ -391,6 +391,7 @@ export const ModelName = {
   ProductImage: 'ProductImage',
   ProductAttribute: 'ProductAttribute',
   ProductAttributeValue: 'ProductAttributeValue',
+  ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
   ProductSkuAttributeValue: 'ProductSkuAttributeValue',
   Session: 'Session',
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productSku" | "productSkuAttributeValue" | "session" | "account" | "verification"
+    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productAttributeValueImage" | "productSku" | "productSkuAttributeValue" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -933,6 +934,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProductAttributeValueImage: {
+      payload: Prisma.$ProductAttributeValueImagePayload<ExtArgs>
+      fields: Prisma.ProductAttributeValueImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProductAttributeValueImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProductAttributeValueImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        findFirst: {
+          args: Prisma.ProductAttributeValueImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProductAttributeValueImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        findMany: {
+          args: Prisma.ProductAttributeValueImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>[]
+        }
+        create: {
+          args: Prisma.ProductAttributeValueImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        createMany: {
+          args: Prisma.ProductAttributeValueImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProductAttributeValueImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>[]
+        }
+        delete: {
+          args: Prisma.ProductAttributeValueImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        update: {
+          args: Prisma.ProductAttributeValueImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProductAttributeValueImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProductAttributeValueImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProductAttributeValueImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProductAttributeValueImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductAttributeValueImagePayload>
+        }
+        aggregate: {
+          args: Prisma.ProductAttributeValueImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProductAttributeValueImage>
+        }
+        groupBy: {
+          args: Prisma.ProductAttributeValueImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductAttributeValueImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProductAttributeValueImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductAttributeValueImageCountAggregateOutputType> | number
+        }
+      }
+    }
     ProductSku: {
       payload: Prisma.$ProductSkuPayload<ExtArgs>
       fields: Prisma.ProductSkuFieldRefs
@@ -1451,6 +1526,20 @@ export const ProductAttributeValueScalarFieldEnum = {
 export type ProductAttributeValueScalarFieldEnum = (typeof ProductAttributeValueScalarFieldEnum)[keyof typeof ProductAttributeValueScalarFieldEnum]
 
 
+export const ProductAttributeValueImageScalarFieldEnum = {
+  id: 'id',
+  imageUrl: 'imageUrl',
+  imageCldPubId: 'imageCldPubId',
+  imageAltText: 'imageAltText',
+  productAttributeValueId: 'productAttributeValueId',
+  isPrimary: 'isPrimary',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductAttributeValueImageScalarFieldEnum = (typeof ProductAttributeValueImageScalarFieldEnum)[keyof typeof ProductAttributeValueImageScalarFieldEnum]
+
+
 export const ProductSkuScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
@@ -1770,6 +1859,7 @@ export type GlobalOmitConfig = {
   productImage?: Prisma.ProductImageOmit
   productAttribute?: Prisma.ProductAttributeOmit
   productAttributeValue?: Prisma.ProductAttributeValueOmit
+  productAttributeValueImage?: Prisma.ProductAttributeValueImageOmit
   productSku?: Prisma.ProductSkuOmit
   productSkuAttributeValue?: Prisma.ProductSkuAttributeValueOmit
   session?: Prisma.SessionOmit

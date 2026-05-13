@@ -145,8 +145,27 @@ model ProductAttributeValue {
   productAttributeId  Int
   productAttribute    ProductAttribute       @relation(fields: [productAttributeId], references: [id], onDelete: Cascade)
   value               String
+  images         ProductAttributeValueImage[]
   skuAttributeValues  ProductSkuAttributeValue[]
 }
+
+model ProductAttributeValueImage {
+  id              Int       @id @default(autoincrement())
+
+  imageUrl        String
+  imageCldPubId   String
+
+  imageAltText    String
+
+  productAttributeValueId Int
+  productAttributeValue ProductAttributeValue @relation(fields: [productAttributeValueId], references: [id], onDelete:Cascade)
+
+  isPrimary       Boolean  @default(false) // main image
+  order           Int      @default(0)     // for sorting
+
+  createdAt       DateTime @default(now())
+}
+
 
 model ProductSku {
   id                  Int                    @id @default(autoincrement())
