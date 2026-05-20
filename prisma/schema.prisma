@@ -19,6 +19,22 @@ enum Role {
   customer
 }
 
+enum HomePageSectionType {
+  products
+  categories
+  banner
+  mixed
+}
+
+enum HomePageSectionLayout {
+  carousel
+  grid_2x2
+  single_grid
+  grid_3x1
+  hero
+  horizontal_scroll
+}
+
 model User {
   id              String   @id @db.Text
   name            String
@@ -76,7 +92,10 @@ model Category {
   deletedAt DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+
   products  Product[]
+  sectionItems HomePageSectionItem[]
 
   @@unique([name, departmentId])
 }
@@ -107,6 +126,7 @@ model Product {
 
   attributes      ProductAttribute[]
   skus            ProductSku[]
+  sectionItems HomePageSectionItem[]
 
   @@index([status])
   @@index([hasVariations])
@@ -177,6 +197,52 @@ model ProductSku {
   createdAt           DateTime               @default(now())
   updatedAt           DateTime               @updatedAt
   attributeValues     ProductAttributeValue[]
+}
+
+model HomePageSection {
+  id            Int      @id @default(autoincrement())
+
+  title         String
+  slug          String   @unique
+
+  ctaText       String 
+
+  type          HomePageSectionType
+  layout        HomePageSectionLayout
+
+  active        Boolean  @default(true)
+
+  position      Int      @default(0)
+
+  config        Json?    @db.JsonB
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  items         HomePageSectionItem[]
+
+  @@index([active])
+  @@index([position])
+}
+
+model HomePageSectionItem {
+  id            Int @id @default(autoincrement())
+
+  sectionId     Int
+  section HomePageSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  productId     Int?
+  product Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  categoryId    Int?
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  imageUrl      String?
+
+  position      Int @default(0)
+
+  @@unique([sectionId, productId])
+  @@unique([sectionId, categoryId])
 }
 
 model Session {

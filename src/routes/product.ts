@@ -83,7 +83,16 @@ router.get("/:id", async (req, res) => {
                 images: {
                     orderBy: { order: 'asc' }
                 },
-                skus: true,
+                skus: {
+                    include: {
+                        attributeValues: {
+                            select: {
+                                id: true,
+                                value: true,
+                            },
+                        },
+                    },
+                },
                 attributes: {
                     include: {
                         values: {
@@ -537,7 +546,7 @@ router.put(
             return res.status(200).json({
                 message:
                     "Attributes updated successfully",
-                    
+
             });
         } catch (error) {
             console.error(error);
@@ -552,53 +561,53 @@ router.put(
 
 // create or update product skus
 router.put(
-  "/:id/skus",
-  async (req, res) => {
-    try {
-      const productId = Number(req.params.id);
+    "/:id/skus",
+    async (req, res) => {
+        try {
+            const productId = Number(req.params.id);
 
-      const { productSkus } = req.body;
+            const { productSkus } = req.body;
 
-      const product =
-        await prisma.product.findUnique({
-          where: {
-            id: productId,
-          },
-        });
+            const product =
+                await prisma.product.findUnique({
+                    where: {
+                        id: productId,
+                    },
+                });
 
-      if (!product) {
-        return res.status(404).json({
-          error: "Product not found",
-        });
-      }
+            if (!product) {
+                return res.status(404).json({
+                    error: "Product not found",
+                });
+            }
 
-      await prisma.$transaction(
-        productSkus.map((sku: any) =>
-          prisma.productSku.update({
-            where: {
-              id: sku.id,
-            },
+            await prisma.$transaction(
+                productSkus.map((sku: any) =>
+                    prisma.productSku.update({
+                        where: {
+                            id: sku.id,
+                        },
 
-            data: {
-              price: sku.price,
+                        data: {
+                            price: sku.price,
 
-              quantity: sku.quantity,
-            },
-          })
-        )
-      );
+                            quantity: sku.quantity,
+                        },
+                    })
+                )
+            );
 
-      return res.status(200).json({
-        message: "SKUs updated successfully",
-      });
-    } catch (error) {
-      console.error(error);
+            return res.status(200).json({
+                message: "SKUs updated successfully",
+            });
+        } catch (error) {
+            console.error(error);
 
-      return res.status(500).json({
-        error: "Failed to update SKUs",
-      });
+            return res.status(500).json({
+                error: "Failed to update SKUs",
+            });
+        }
     }
-  }
 );
 
 // toggle variations

@@ -393,6 +393,8 @@ export const ModelName = {
   ProductAttributeValue: 'ProductAttributeValue',
   ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
+  HomePageSection: 'HomePageSection',
+  HomePageSectionItem: 'HomePageSectionItem',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -411,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productAttributeValueImage" | "productSku" | "session" | "account" | "verification"
+    modelProps: "user" | "department" | "category" | "product" | "productImage" | "productAttribute" | "productAttributeValue" | "productAttributeValueImage" | "productSku" | "homePageSection" | "homePageSectionItem" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1081,6 +1083,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    HomePageSection: {
+      payload: Prisma.$HomePageSectionPayload<ExtArgs>
+      fields: Prisma.HomePageSectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HomePageSectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HomePageSectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        findFirst: {
+          args: Prisma.HomePageSectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HomePageSectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        findMany: {
+          args: Prisma.HomePageSectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>[]
+        }
+        create: {
+          args: Prisma.HomePageSectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        createMany: {
+          args: Prisma.HomePageSectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HomePageSectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>[]
+        }
+        delete: {
+          args: Prisma.HomePageSectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        update: {
+          args: Prisma.HomePageSectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.HomePageSectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HomePageSectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HomePageSectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.HomePageSectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionPayload>
+        }
+        aggregate: {
+          args: Prisma.HomePageSectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHomePageSection>
+        }
+        groupBy: {
+          args: Prisma.HomePageSectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomePageSectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HomePageSectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomePageSectionCountAggregateOutputType> | number
+        }
+      }
+    }
+    HomePageSectionItem: {
+      payload: Prisma.$HomePageSectionItemPayload<ExtArgs>
+      fields: Prisma.HomePageSectionItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HomePageSectionItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HomePageSectionItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        findFirst: {
+          args: Prisma.HomePageSectionItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HomePageSectionItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        findMany: {
+          args: Prisma.HomePageSectionItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>[]
+        }
+        create: {
+          args: Prisma.HomePageSectionItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        createMany: {
+          args: Prisma.HomePageSectionItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HomePageSectionItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>[]
+        }
+        delete: {
+          args: Prisma.HomePageSectionItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        update: {
+          args: Prisma.HomePageSectionItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.HomePageSectionItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HomePageSectionItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HomePageSectionItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.HomePageSectionItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomePageSectionItemPayload>
+        }
+        aggregate: {
+          args: Prisma.HomePageSectionItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHomePageSectionItem>
+        }
+        groupBy: {
+          args: Prisma.HomePageSectionItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomePageSectionItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HomePageSectionItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomePageSectionItemCountAggregateOutputType> | number
+        }
+      }
+    }
     Session: {
       payload: Prisma.$SessionPayload<ExtArgs>
       fields: Prisma.SessionFieldRefs
@@ -1478,6 +1628,35 @@ export const ProductSkuScalarFieldEnum = {
 export type ProductSkuScalarFieldEnum = (typeof ProductSkuScalarFieldEnum)[keyof typeof ProductSkuScalarFieldEnum]
 
 
+export const HomePageSectionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  ctaText: 'ctaText',
+  type: 'type',
+  layout: 'layout',
+  active: 'active',
+  position: 'position',
+  config: 'config',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomePageSectionScalarFieldEnum = (typeof HomePageSectionScalarFieldEnum)[keyof typeof HomePageSectionScalarFieldEnum]
+
+
+export const HomePageSectionItemScalarFieldEnum = {
+  id: 'id',
+  sectionId: 'sectionId',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  imageUrl: 'imageUrl',
+  position: 'position'
+} as const
+
+export type HomePageSectionItemScalarFieldEnum = (typeof HomePageSectionItemScalarFieldEnum)[keyof typeof HomePageSectionItemScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1536,6 +1715,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1661,6 +1848,34 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
 
 
 /**
+ * Reference to a field of type 'HomePageSectionType'
+ */
+export type EnumHomePageSectionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomePageSectionType'>
+    
+
+
+/**
+ * Reference to a field of type 'HomePageSectionType[]'
+ */
+export type ListEnumHomePageSectionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomePageSectionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'HomePageSectionLayout'
+ */
+export type EnumHomePageSectionLayoutFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomePageSectionLayout'>
+    
+
+
+/**
+ * Reference to a field of type 'HomePageSectionLayout[]'
+ */
+export type ListEnumHomePageSectionLayoutFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomePageSectionLayout[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1777,6 +1992,8 @@ export type GlobalOmitConfig = {
   productAttributeValue?: Prisma.ProductAttributeValueOmit
   productAttributeValueImage?: Prisma.ProductAttributeValueImageOmit
   productSku?: Prisma.ProductSkuOmit
+  homePageSection?: Prisma.HomePageSectionOmit
+  homePageSectionItem?: Prisma.HomePageSectionItemOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

@@ -16,3 +16,25 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const HomePageSectionType = {
+  products: 'products',
+  categories: 'categories',
+  banner: 'banner',
+  mixed: 'mixed'
+} as const
+
+export type HomePageSectionType = (typeof HomePageSectionType)[keyof typeof HomePageSectionType]
+
+
+export const HomePageSectionLayout = {
+  carousel: 'carousel',
+  grid_2x2: 'grid_2x2',
+  single_grid: 'single_grid',
+  grid_3x1: 'grid_3x1',
+  hero: 'hero',
+  horizontal_scroll: 'horizontal_scroll'
+} as const
+
+export type HomePageSectionLayout = (typeof HomePageSectionLayout)[keyof typeof HomePageSectionLayout]

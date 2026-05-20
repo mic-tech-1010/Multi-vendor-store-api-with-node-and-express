@@ -9,6 +9,8 @@ import userRouter from '#routes/user.js';
 import departmentRouter from '#routes/department.js';
 import categoryRouter from '#routes/category.js';
 import cloudinaryRouter from '#routes/cloudinary.js';
+import homeSectionRouter from '#routes/homeSection.js';
+import homeSectionItemsRouter from '#routes/homeSectionItems.js';
 
 const app: Express = express();
 
@@ -40,6 +42,10 @@ app.use('/api/departments', departmentRouter);
 app.use('/api/categories', categoryRouter);
 
 app.use('/api/cloudinary', cloudinaryRouter);
+
+app.use('/api/homePageSections', homeSectionRouter);
+
+app.use('/api/homePageSectionItems', homeSectionItemsRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 

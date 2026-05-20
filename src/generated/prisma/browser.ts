@@ -63,6 +63,16 @@ export type ProductAttributeValueImage = Prisma.ProductAttributeValueImageModel
  */
 export type ProductSku = Prisma.ProductSkuModel
 /**
+ * Model HomePageSection
+ * 
+ */
+export type HomePageSection = Prisma.HomePageSectionModel
+/**
+ * Model HomePageSectionItem
+ * 
+ */
+export type HomePageSectionItem = Prisma.HomePageSectionItemModel
+/**
  * Model Session
  * 
  */

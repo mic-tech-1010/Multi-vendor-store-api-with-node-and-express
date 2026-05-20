@@ -60,6 +60,8 @@ export const ModelName = {
   ProductAttributeValue: 'ProductAttributeValue',
   ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
+  HomePageSection: 'HomePageSection',
+  HomePageSectionItem: 'HomePageSectionItem',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -217,6 +219,35 @@ export const ProductSkuScalarFieldEnum = {
 export type ProductSkuScalarFieldEnum = (typeof ProductSkuScalarFieldEnum)[keyof typeof ProductSkuScalarFieldEnum]
 
 
+export const HomePageSectionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  ctaText: 'ctaText',
+  type: 'type',
+  layout: 'layout',
+  active: 'active',
+  position: 'position',
+  config: 'config',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomePageSectionScalarFieldEnum = (typeof HomePageSectionScalarFieldEnum)[keyof typeof HomePageSectionScalarFieldEnum]
+
+
+export const HomePageSectionItemScalarFieldEnum = {
+  id: 'id',
+  sectionId: 'sectionId',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  imageUrl: 'imageUrl',
+  position: 'position'
+} as const
+
+export type HomePageSectionItemScalarFieldEnum = (typeof HomePageSectionItemScalarFieldEnum)[keyof typeof HomePageSectionItemScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -275,6 +306,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
