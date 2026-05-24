@@ -5,7 +5,7 @@ import { defineConfig } from "prisma/config";
 import { buildDatabaseUrl } from "./src/db/database-init";
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
+  schema: "./prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },

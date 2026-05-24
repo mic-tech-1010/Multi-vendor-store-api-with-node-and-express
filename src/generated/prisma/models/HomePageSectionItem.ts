@@ -261,6 +261,7 @@ export type HomePageSectionItemWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   sectionId_productId?: Prisma.HomePageSectionItemSectionIdProductIdCompoundUniqueInput
   sectionId_categoryId?: Prisma.HomePageSectionItemSectionIdCategoryIdCompoundUniqueInput
+  sectionId_position?: Prisma.HomePageSectionItemSectionIdPositionCompoundUniqueInput
   AND?: Prisma.HomePageSectionItemWhereInput | Prisma.HomePageSectionItemWhereInput[]
   OR?: Prisma.HomePageSectionItemWhereInput[]
   NOT?: Prisma.HomePageSectionItemWhereInput | Prisma.HomePageSectionItemWhereInput[]
@@ -272,7 +273,7 @@ export type HomePageSectionItemWhereUniqueInput = Prisma.AtLeast<{
   section?: Prisma.XOR<Prisma.HomePageSectionScalarRelationFilter, Prisma.HomePageSectionWhereInput>
   product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
-}, "id" | "sectionId_productId" | "sectionId_categoryId">
+}, "id" | "sectionId_productId" | "sectionId_categoryId" | "sectionId_position">
 
 export type HomePageSectionItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -375,6 +376,11 @@ export type HomePageSectionItemSectionIdProductIdCompoundUniqueInput = {
 export type HomePageSectionItemSectionIdCategoryIdCompoundUniqueInput = {
   sectionId: number
   categoryId: number
+}
+
+export type HomePageSectionItemSectionIdPositionCompoundUniqueInput = {
+  sectionId: number
+  position: number
 }
 
 export type HomePageSectionItemCountOrderByAggregateInput = {

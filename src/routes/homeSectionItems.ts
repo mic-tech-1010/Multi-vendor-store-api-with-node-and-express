@@ -228,10 +228,9 @@ router.post("/", async (req, res) => {
 
         const {
             sectionId,
-            productId,
-            categoryId,
+            productIds = [],
+            categoryIds = [],
             imageUrl,
-            position = 0,
         } = req.body;
 
         /*
@@ -262,48 +261,110 @@ router.post("/", async (req, res) => {
         |--------------------------------------------------------------------------
         */
 
-        const item =
-            await prisma.homePageSectionItem.create(
-                {
-                    data: {
-                        sectionId:
-                            Number(sectionId),
+        const lastItem =
+            await prisma.homePageSectionItem.findFirst({
+                where: {
+                    sectionId: Number(sectionId),
+                },
 
-                        productId:
-                            productId &&
-                            productId !== ""
-                                ? Number(productId)
-                                : null,
+                orderBy: {
+                    position: "desc",
+                },
+            });
 
-                        categoryId:
-                            categoryId &&
-                            categoryId !== ""
-                                ? Number(categoryId)
-                                : null,
+        const startPosition =
+            lastItem ? lastItem.position + 1 : 1;
 
-                        imageUrl:
-                            imageUrl || null,
+        // const item =
+        //     await prisma.homePageSectionItem.create(
+        //         {
+        //             data: {
+        //                 sectionId:
+        //                     Number(sectionId),
 
-                        position:
-                            Number(position),
-                    },
+        //                 productId:
+        //                     productId &&
+        //                         productId !== ""
+        //                         ? Number(productId)
+        //                         : null,
 
-                    include: {
-                        section: true,
+        //                 categoryId:
+        //                     categoryId &&
+        //                         categoryId !== ""
+        //                         ? Number(categoryId)
+        //                         : null,
 
-                        product: {
-                            include: {
-                                images: true,
-                            },
-                        },
+        //                 imageUrl:
+        //                     imageUrl || null,
 
-                        category: true,
-                    },
-                }
-            );
+        //                 position:
+        //                     Number(position),
+        //             },
+
+        //             include: {
+        //                 section: true,
+
+        //                 product: {
+        //                     include: {
+        //                         images: true,
+        //                     },
+        //                 },
+
+        //                 category: true,
+        //             },
+        //         }
+        //     );
+
+        const itemsToCreate = [];
+
+        /*
+        |--------------------------------------------------------------------------
+        | PRODUCTS
+        |--------------------------------------------------------------------------
+        */
+
+        for (const [index, productId] of productIds.entries()) {
+
+            itemsToCreate.push({
+                sectionId: Number(sectionId),
+
+                productId: Number(productId),
+
+                categoryId: null,
+
+                imageUrl: imageUrl || null,
+
+                position: startPosition + index,
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CATEGORIES
+        |--------------------------------------------------------------------------
+        */
+
+        for (const [index, categoryId] of categoryIds.entries()) {
+
+            itemsToCreate.push({
+                sectionId: Number(sectionId),
+
+                productId: null,
+
+                categoryId: Number(categoryId),
+
+                imageUrl: imageUrl || null,
+
+                position: startPosition + index,
+            });
+        }
+
+        await prisma.homePageSectionItem.createMany({
+            data: itemsToCreate,
+        });
 
         return res.status(201).json({
-            data: item,
+            // data: item,
 
             message:
                 "Homepage section item created successfully",
@@ -333,6 +394,132 @@ router.post("/", async (req, res) => {
 
     }
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| REORDER HOME PAGE SECTION ITEM POSITION
+|--------------------------------------------------------------------------
+*/
+
+router.patch("/reorder", async (req, res) => {
+    try {
+
+        const { 
+            sectionId, 
+            items 
+        } = req.body;
+     
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDATION
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !sectionId ||
+            !Array.isArray(items)
+        ) {
+            return res.status(400).json({
+                message: "Invalid payload",
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK SECTION EXISTS
+        |--------------------------------------------------------------------------
+        */
+
+        const existingSection =
+            await prisma.homePageSection.findUnique({
+                where: {
+                    id: Number(sectionId),
+                },
+            });
+
+        if (!existingSection) {
+            return res.status(404).json({
+                message:
+                    "Homepage section not found",
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REORDER
+        |--------------------------------------------------------------------------
+        */
+
+        await prisma.$transaction(
+            async (tx) => {
+
+                /*
+                |--------------------------------------------------------------------------
+                | TEMP OFFSET
+                |--------------------------------------------------------------------------
+                |
+                | Prevents unique constraint collision on:
+                |
+                | @@unique([sectionId, position])
+                |
+                */
+
+                for (const item of items) {
+
+                    await tx.homePageSectionItem.update({
+                        where: {
+                            id: Number(item.id),
+                        },
+
+                        data: {
+                            position:
+                                Number(item.position) + 1000,
+                        },
+                    });
+
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | FINAL POSITIONS
+                |--------------------------------------------------------------------------
+                */
+
+                for (const [index, item] of items.entries()) {
+
+                    await tx.homePageSectionItem.update({
+                        where: {
+                            id: Number(item.id),
+                        },
+
+                        data: {
+                            position: index + 1,
+                        },
+                    });
+
+                }
+
+            }
+        );
+
+        return res.status(200).json({
+            message:
+                "Items reordered successfully",
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        return res.status(500).json({
+            message:
+                "Failed to reorder items",
+        });
+
+    }
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -390,34 +577,34 @@ router.patch("/:id", async (req, res) => {
                     data: {
                         ...(productId !==
                             undefined && {
-                                productId:
-                                    productId &&
+                            productId:
+                                productId &&
                                     productId !== ""
-                                        ? Number(productId)
-                                        : null,
-                            }),
+                                    ? Number(productId)
+                                    : null,
+                        }),
 
                         ...(categoryId !==
                             undefined && {
-                                categoryId:
-                                    categoryId &&
+                            categoryId:
+                                categoryId &&
                                     categoryId !== ""
-                                        ? Number(categoryId)
-                                        : null,
-                            }),
+                                    ? Number(categoryId)
+                                    : null,
+                        }),
 
                         ...(imageUrl !==
                             undefined && {
-                                imageUrl:
-                                    imageUrl ||
-                                    null,
-                            }),
+                            imageUrl:
+                                imageUrl ||
+                                null,
+                        }),
 
                         ...(position !==
                             undefined && {
-                                position:
-                                    Number(position),
-                            }),
+                            position:
+                                Number(position),
+                        }),
                     },
 
                     include: {

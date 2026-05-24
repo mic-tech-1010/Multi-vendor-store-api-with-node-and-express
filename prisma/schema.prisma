@@ -186,7 +186,6 @@ model ProductAttributeValueImage {
   createdAt       DateTime @default(now())
 }
 
-
 model ProductSku {
   id                  Int                    @id @default(autoincrement())
   productId           Int
@@ -243,6 +242,7 @@ model HomePageSectionItem {
 
   @@unique([sectionId, productId])
   @@unique([sectionId, categoryId])
+  @@unique([sectionId, position])
 }
 
 model Session {
