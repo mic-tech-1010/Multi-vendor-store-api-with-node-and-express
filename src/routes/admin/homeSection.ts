@@ -1,5 +1,5 @@
 import express from "express";
-import { prisma } from "../db/prisma";
+import { prisma } from "../../db/prisma";
 
 const router = express.Router();
 
@@ -15,9 +15,11 @@ router.get("/", async (req, res) => {
             search,
             active,
             type,
+            groupId,
             page = 1,
             limit = 10,
         } = req.query;
+
 
         const currentPage = Math.max(1, Number(page));
         const limitPerPage = Math.max(1, Number(limit));
@@ -70,6 +72,14 @@ router.get("/", async (req, res) => {
 
         if (type) {
             whereCondition.type = type;
+        }
+
+        // 🎯 FILTER BY GROUP
+        if (groupId && typeof groupId === "string") {
+            const id = Number(groupId);
+            if (!isNaN(id)) {
+                whereCondition.groupId = id;
+            }
         }
 
         /*
@@ -226,9 +236,10 @@ router.post("/", async (req, res) => {
             ctaText,
             type,
             layout,
+            groupId,
             active = true,
             config,
-            items = [],
+            // items = [],
         } = req.body;
 
         /*
@@ -262,6 +273,7 @@ router.post("/", async (req, res) => {
                     ctaText,
                     type,
                     layout,
+                    groupId,
                     active,
                     position: startPosition,
                     config: config || {},
@@ -274,29 +286,29 @@ router.post("/", async (req, res) => {
         |--------------------------------------------------------------------------
         */
 
-        if (items.length > 0) {
-            const itemData = items.map(
-                (item: any, index: number) => ({
-                    sectionId: section.id,
+        // if (items.length > 0) {
+        //     const itemData = items.map(
+        //         (item: any, index: number) => ({
+        //             sectionId: section.id,
 
-                    productId: item.productId
-                        ? Number(item.productId)
-                        : null,
+        //             productId: item.productId
+        //                 ? Number(item.productId)
+        //                 : null,
 
-                    categoryId: item.categoryId
-                        ? Number(item.categoryId)
-                        : null,
+        //             categoryId: item.categoryId
+        //                 ? Number(item.categoryId)
+        //                 : null,
 
-                    imageUrl: item.imageUrl || null,
+        //             imageUrl: item.imageUrl || null,
 
-                    position: index + 1,
-                })
-            );
+        //             position: index + 1,
+        //         })
+        //     );
 
-            await prisma.homePageSectionItem.createMany({
-                data: itemData,
-            });
-        }
+        //     await prisma.homePageSectionItem.createMany({
+        //         data: itemData,
+        //     });
+        // }
 
         /*
         |--------------------------------------------------------------------------

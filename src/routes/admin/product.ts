@@ -1,5 +1,5 @@
 import express from 'express';
-import { prisma } from '../db/prisma';
+import { prisma } from '../../db/prisma';
 import validate from '#lib/validator.js';
 import { CreateProductSchema, UpdateProductSchema } from '#schemas/validation/productSchema.js';
 import { generateProductSkus } from '#services/product-sku-generator.js';

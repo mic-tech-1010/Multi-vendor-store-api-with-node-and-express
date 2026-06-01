@@ -60,6 +60,7 @@ export const ModelName = {
   ProductAttributeValue: 'ProductAttributeValue',
   ProductAttributeValueImage: 'ProductAttributeValueImage',
   ProductSku: 'ProductSku',
+  HomePageSectionGroup: 'HomePageSectionGroup',
   HomePageSection: 'HomePageSection',
   HomePageSectionItem: 'HomePageSectionItem',
   Session: 'Session',
@@ -219,6 +220,18 @@ export const ProductSkuScalarFieldEnum = {
 export type ProductSkuScalarFieldEnum = (typeof ProductSkuScalarFieldEnum)[keyof typeof ProductSkuScalarFieldEnum]
 
 
+export const HomePageSectionGroupScalarFieldEnum = {
+  id: 'id',
+  isFullWidth: 'isFullWidth',
+  position: 'position',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomePageSectionGroupScalarFieldEnum = (typeof HomePageSectionGroupScalarFieldEnum)[keyof typeof HomePageSectionGroupScalarFieldEnum]
+
+
 export const HomePageSectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -230,7 +243,8 @@ export const HomePageSectionScalarFieldEnum = {
   position: 'position',
   config: 'config',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  groupId: 'groupId'
 } as const
 
 export type HomePageSectionScalarFieldEnum = (typeof HomePageSectionScalarFieldEnum)[keyof typeof HomePageSectionScalarFieldEnum]

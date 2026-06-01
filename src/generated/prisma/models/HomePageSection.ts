@@ -29,11 +29,13 @@ export type AggregateHomePageSection = {
 export type HomePageSectionAvgAggregateOutputType = {
   id: number | null
   position: number | null
+  groupId: number | null
 }
 
 export type HomePageSectionSumAggregateOutputType = {
   id: number | null
   position: number | null
+  groupId: number | null
 }
 
 export type HomePageSectionMinAggregateOutputType = {
@@ -47,6 +49,7 @@ export type HomePageSectionMinAggregateOutputType = {
   position: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  groupId: number | null
 }
 
 export type HomePageSectionMaxAggregateOutputType = {
@@ -60,6 +63,7 @@ export type HomePageSectionMaxAggregateOutputType = {
   position: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  groupId: number | null
 }
 
 export type HomePageSectionCountAggregateOutputType = {
@@ -74,6 +78,7 @@ export type HomePageSectionCountAggregateOutputType = {
   config: number
   createdAt: number
   updatedAt: number
+  groupId: number
   _all: number
 }
 
@@ -81,11 +86,13 @@ export type HomePageSectionCountAggregateOutputType = {
 export type HomePageSectionAvgAggregateInputType = {
   id?: true
   position?: true
+  groupId?: true
 }
 
 export type HomePageSectionSumAggregateInputType = {
   id?: true
   position?: true
+  groupId?: true
 }
 
 export type HomePageSectionMinAggregateInputType = {
@@ -99,6 +106,7 @@ export type HomePageSectionMinAggregateInputType = {
   position?: true
   createdAt?: true
   updatedAt?: true
+  groupId?: true
 }
 
 export type HomePageSectionMaxAggregateInputType = {
@@ -112,6 +120,7 @@ export type HomePageSectionMaxAggregateInputType = {
   position?: true
   createdAt?: true
   updatedAt?: true
+  groupId?: true
 }
 
 export type HomePageSectionCountAggregateInputType = {
@@ -126,6 +135,7 @@ export type HomePageSectionCountAggregateInputType = {
   config?: true
   createdAt?: true
   updatedAt?: true
+  groupId?: true
   _all?: true
 }
 
@@ -227,6 +237,7 @@ export type HomePageSectionGroupByOutputType = {
   config: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
+  groupId: number | null
   _count: HomePageSectionCountAggregateOutputType | null
   _avg: HomePageSectionAvgAggregateOutputType | null
   _sum: HomePageSectionSumAggregateOutputType | null
@@ -264,6 +275,8 @@ export type HomePageSectionWhereInput = {
   config?: Prisma.JsonNullableFilter<"HomePageSection">
   createdAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
+  groupId?: Prisma.IntNullableFilter<"HomePageSection"> | number | null
+  group?: Prisma.XOR<Prisma.HomePageSectionGroupNullableScalarRelationFilter, Prisma.HomePageSectionGroupWhereInput> | null
   items?: Prisma.HomePageSectionItemListRelationFilter
 }
 
@@ -279,12 +292,15 @@ export type HomePageSectionOrderByWithRelationInput = {
   config?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
+  group?: Prisma.HomePageSectionGroupOrderByWithRelationInput
   items?: Prisma.HomePageSectionItemOrderByRelationAggregateInput
 }
 
 export type HomePageSectionWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   slug?: string
+  position?: number
   AND?: Prisma.HomePageSectionWhereInput | Prisma.HomePageSectionWhereInput[]
   OR?: Prisma.HomePageSectionWhereInput[]
   NOT?: Prisma.HomePageSectionWhereInput | Prisma.HomePageSectionWhereInput[]
@@ -293,12 +309,13 @@ export type HomePageSectionWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumHomePageSectionTypeFilter<"HomePageSection"> | $Enums.HomePageSectionType
   layout?: Prisma.EnumHomePageSectionLayoutFilter<"HomePageSection"> | $Enums.HomePageSectionLayout
   active?: Prisma.BoolFilter<"HomePageSection"> | boolean
-  position?: Prisma.IntFilter<"HomePageSection"> | number
   config?: Prisma.JsonNullableFilter<"HomePageSection">
   createdAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
+  groupId?: Prisma.IntNullableFilter<"HomePageSection"> | number | null
+  group?: Prisma.XOR<Prisma.HomePageSectionGroupNullableScalarRelationFilter, Prisma.HomePageSectionGroupWhereInput> | null
   items?: Prisma.HomePageSectionItemListRelationFilter
-}, "id" | "slug">
+}, "id" | "slug" | "position">
 
 export type HomePageSectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -312,6 +329,7 @@ export type HomePageSectionOrderByWithAggregationInput = {
   config?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.HomePageSectionCountOrderByAggregateInput
   _avg?: Prisma.HomePageSectionAvgOrderByAggregateInput
   _max?: Prisma.HomePageSectionMaxOrderByAggregateInput
@@ -334,6 +352,7 @@ export type HomePageSectionScalarWhereWithAggregatesInput = {
   config?: Prisma.JsonNullableWithAggregatesFilter<"HomePageSection">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HomePageSection"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HomePageSection"> | Date | string
+  groupId?: Prisma.IntNullableWithAggregatesFilter<"HomePageSection"> | number | null
 }
 
 export type HomePageSectionCreateInput = {
@@ -347,6 +366,7 @@ export type HomePageSectionCreateInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  group?: Prisma.HomePageSectionGroupCreateNestedOneWithoutSectionsInput
   items?: Prisma.HomePageSectionItemCreateNestedManyWithoutSectionInput
 }
 
@@ -362,6 +382,7 @@ export type HomePageSectionUncheckedCreateInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  groupId?: number | null
   items?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutSectionInput
 }
 
@@ -376,6 +397,7 @@ export type HomePageSectionUpdateInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  group?: Prisma.HomePageSectionGroupUpdateOneWithoutSectionsNestedInput
   items?: Prisma.HomePageSectionItemUpdateManyWithoutSectionNestedInput
 }
 
@@ -391,6 +413,7 @@ export type HomePageSectionUncheckedUpdateInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groupId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutSectionNestedInput
 }
 
@@ -406,6 +429,7 @@ export type HomePageSectionCreateManyInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  groupId?: number | null
 }
 
 export type HomePageSectionUpdateManyMutationInput = {
@@ -433,6 +457,17 @@ export type HomePageSectionUncheckedUpdateManyInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groupId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HomePageSectionListRelationFilter = {
+  every?: Prisma.HomePageSectionWhereInput
+  some?: Prisma.HomePageSectionWhereInput
+  none?: Prisma.HomePageSectionWhereInput
+}
+
+export type HomePageSectionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type HomePageSectionCountOrderByAggregateInput = {
@@ -447,11 +482,13 @@ export type HomePageSectionCountOrderByAggregateInput = {
   config?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
 }
 
 export type HomePageSectionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
 }
 
 export type HomePageSectionMaxOrderByAggregateInput = {
@@ -465,6 +502,7 @@ export type HomePageSectionMaxOrderByAggregateInput = {
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
 }
 
 export type HomePageSectionMinOrderByAggregateInput = {
@@ -478,16 +516,60 @@ export type HomePageSectionMinOrderByAggregateInput = {
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
 }
 
 export type HomePageSectionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
 }
 
 export type HomePageSectionScalarRelationFilter = {
   is?: Prisma.HomePageSectionWhereInput
   isNot?: Prisma.HomePageSectionWhereInput
+}
+
+export type HomePageSectionCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput> | Prisma.HomePageSectionCreateWithoutGroupInput[] | Prisma.HomePageSectionUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.HomePageSectionCreateOrConnectWithoutGroupInput | Prisma.HomePageSectionCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.HomePageSectionCreateManyGroupInputEnvelope
+  connect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+}
+
+export type HomePageSectionUncheckedCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput> | Prisma.HomePageSectionCreateWithoutGroupInput[] | Prisma.HomePageSectionUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.HomePageSectionCreateOrConnectWithoutGroupInput | Prisma.HomePageSectionCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.HomePageSectionCreateManyGroupInputEnvelope
+  connect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+}
+
+export type HomePageSectionUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput> | Prisma.HomePageSectionCreateWithoutGroupInput[] | Prisma.HomePageSectionUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.HomePageSectionCreateOrConnectWithoutGroupInput | Prisma.HomePageSectionCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.HomePageSectionUpsertWithWhereUniqueWithoutGroupInput | Prisma.HomePageSectionUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.HomePageSectionCreateManyGroupInputEnvelope
+  set?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  disconnect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  delete?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  connect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  update?: Prisma.HomePageSectionUpdateWithWhereUniqueWithoutGroupInput | Prisma.HomePageSectionUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.HomePageSectionUpdateManyWithWhereWithoutGroupInput | Prisma.HomePageSectionUpdateManyWithWhereWithoutGroupInput[]
+  deleteMany?: Prisma.HomePageSectionScalarWhereInput | Prisma.HomePageSectionScalarWhereInput[]
+}
+
+export type HomePageSectionUncheckedUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput> | Prisma.HomePageSectionCreateWithoutGroupInput[] | Prisma.HomePageSectionUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.HomePageSectionCreateOrConnectWithoutGroupInput | Prisma.HomePageSectionCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.HomePageSectionUpsertWithWhereUniqueWithoutGroupInput | Prisma.HomePageSectionUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.HomePageSectionCreateManyGroupInputEnvelope
+  set?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  disconnect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  delete?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  connect?: Prisma.HomePageSectionWhereUniqueInput | Prisma.HomePageSectionWhereUniqueInput[]
+  update?: Prisma.HomePageSectionUpdateWithWhereUniqueWithoutGroupInput | Prisma.HomePageSectionUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.HomePageSectionUpdateManyWithWhereWithoutGroupInput | Prisma.HomePageSectionUpdateManyWithWhereWithoutGroupInput[]
+  deleteMany?: Prisma.HomePageSectionScalarWhereInput | Prisma.HomePageSectionScalarWhereInput[]
 }
 
 export type EnumHomePageSectionTypeFieldUpdateOperationsInput = {
@@ -512,6 +594,79 @@ export type HomePageSectionUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HomePageSectionUpdateToOneWithWhereWithoutItemsInput, Prisma.HomePageSectionUpdateWithoutItemsInput>, Prisma.HomePageSectionUncheckedUpdateWithoutItemsInput>
 }
 
+export type HomePageSectionCreateWithoutGroupInput = {
+  title: string
+  slug: string
+  ctaText: string
+  type: $Enums.HomePageSectionType
+  layout: $Enums.HomePageSectionLayout
+  active?: boolean
+  position?: number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.HomePageSectionItemCreateNestedManyWithoutSectionInput
+}
+
+export type HomePageSectionUncheckedCreateWithoutGroupInput = {
+  id?: number
+  title: string
+  slug: string
+  ctaText: string
+  type: $Enums.HomePageSectionType
+  layout: $Enums.HomePageSectionLayout
+  active?: boolean
+  position?: number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutSectionInput
+}
+
+export type HomePageSectionCreateOrConnectWithoutGroupInput = {
+  where: Prisma.HomePageSectionWhereUniqueInput
+  create: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput>
+}
+
+export type HomePageSectionCreateManyGroupInputEnvelope = {
+  data: Prisma.HomePageSectionCreateManyGroupInput | Prisma.HomePageSectionCreateManyGroupInput[]
+  skipDuplicates?: boolean
+}
+
+export type HomePageSectionUpsertWithWhereUniqueWithoutGroupInput = {
+  where: Prisma.HomePageSectionWhereUniqueInput
+  update: Prisma.XOR<Prisma.HomePageSectionUpdateWithoutGroupInput, Prisma.HomePageSectionUncheckedUpdateWithoutGroupInput>
+  create: Prisma.XOR<Prisma.HomePageSectionCreateWithoutGroupInput, Prisma.HomePageSectionUncheckedCreateWithoutGroupInput>
+}
+
+export type HomePageSectionUpdateWithWhereUniqueWithoutGroupInput = {
+  where: Prisma.HomePageSectionWhereUniqueInput
+  data: Prisma.XOR<Prisma.HomePageSectionUpdateWithoutGroupInput, Prisma.HomePageSectionUncheckedUpdateWithoutGroupInput>
+}
+
+export type HomePageSectionUpdateManyWithWhereWithoutGroupInput = {
+  where: Prisma.HomePageSectionScalarWhereInput
+  data: Prisma.XOR<Prisma.HomePageSectionUpdateManyMutationInput, Prisma.HomePageSectionUncheckedUpdateManyWithoutGroupInput>
+}
+
+export type HomePageSectionScalarWhereInput = {
+  AND?: Prisma.HomePageSectionScalarWhereInput | Prisma.HomePageSectionScalarWhereInput[]
+  OR?: Prisma.HomePageSectionScalarWhereInput[]
+  NOT?: Prisma.HomePageSectionScalarWhereInput | Prisma.HomePageSectionScalarWhereInput[]
+  id?: Prisma.IntFilter<"HomePageSection"> | number
+  title?: Prisma.StringFilter<"HomePageSection"> | string
+  slug?: Prisma.StringFilter<"HomePageSection"> | string
+  ctaText?: Prisma.StringFilter<"HomePageSection"> | string
+  type?: Prisma.EnumHomePageSectionTypeFilter<"HomePageSection"> | $Enums.HomePageSectionType
+  layout?: Prisma.EnumHomePageSectionLayoutFilter<"HomePageSection"> | $Enums.HomePageSectionLayout
+  active?: Prisma.BoolFilter<"HomePageSection"> | boolean
+  position?: Prisma.IntFilter<"HomePageSection"> | number
+  config?: Prisma.JsonNullableFilter<"HomePageSection">
+  createdAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"HomePageSection"> | Date | string
+  groupId?: Prisma.IntNullableFilter<"HomePageSection"> | number | null
+}
+
 export type HomePageSectionCreateWithoutItemsInput = {
   title: string
   slug: string
@@ -523,6 +678,7 @@ export type HomePageSectionCreateWithoutItemsInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  group?: Prisma.HomePageSectionGroupCreateNestedOneWithoutSectionsInput
 }
 
 export type HomePageSectionUncheckedCreateWithoutItemsInput = {
@@ -537,6 +693,7 @@ export type HomePageSectionUncheckedCreateWithoutItemsInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  groupId?: number | null
 }
 
 export type HomePageSectionCreateOrConnectWithoutItemsInput = {
@@ -566,9 +723,68 @@ export type HomePageSectionUpdateWithoutItemsInput = {
   config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  group?: Prisma.HomePageSectionGroupUpdateOneWithoutSectionsNestedInput
 }
 
 export type HomePageSectionUncheckedUpdateWithoutItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaText?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumHomePageSectionTypeFieldUpdateOperationsInput | $Enums.HomePageSectionType
+  layout?: Prisma.EnumHomePageSectionLayoutFieldUpdateOperationsInput | $Enums.HomePageSectionLayout
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groupId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HomePageSectionCreateManyGroupInput = {
+  id?: number
+  title: string
+  slug: string
+  ctaText: string
+  type: $Enums.HomePageSectionType
+  layout: $Enums.HomePageSectionLayout
+  active?: boolean
+  position?: number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HomePageSectionUpdateWithoutGroupInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaText?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumHomePageSectionTypeFieldUpdateOperationsInput | $Enums.HomePageSectionType
+  layout?: Prisma.EnumHomePageSectionLayoutFieldUpdateOperationsInput | $Enums.HomePageSectionLayout
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.HomePageSectionItemUpdateManyWithoutSectionNestedInput
+}
+
+export type HomePageSectionUncheckedUpdateWithoutGroupInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaText?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumHomePageSectionTypeFieldUpdateOperationsInput | $Enums.HomePageSectionType
+  layout?: Prisma.EnumHomePageSectionLayoutFieldUpdateOperationsInput | $Enums.HomePageSectionLayout
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  config?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutSectionNestedInput
+}
+
+export type HomePageSectionUncheckedUpdateManyWithoutGroupInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -625,6 +841,8 @@ export type HomePageSectionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   config?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  groupId?: boolean
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
   items?: boolean | Prisma.HomePageSection$itemsArgs<ExtArgs>
   _count?: boolean | Prisma.HomePageSectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homePageSection"]>
@@ -641,6 +859,8 @@ export type HomePageSectionSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   config?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  groupId?: boolean
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
 }, ExtArgs["result"]["homePageSection"]>
 
 export type HomePageSectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -655,6 +875,8 @@ export type HomePageSectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   config?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  groupId?: boolean
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
 }, ExtArgs["result"]["homePageSection"]>
 
 export type HomePageSectionSelectScalar = {
@@ -669,19 +891,26 @@ export type HomePageSectionSelectScalar = {
   config?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  groupId?: boolean
 }
 
-export type HomePageSectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "ctaText" | "type" | "layout" | "active" | "position" | "config" | "createdAt" | "updatedAt", ExtArgs["result"]["homePageSection"]>
+export type HomePageSectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "ctaText" | "type" | "layout" | "active" | "position" | "config" | "createdAt" | "updatedAt" | "groupId", ExtArgs["result"]["homePageSection"]>
 export type HomePageSectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
   items?: boolean | Prisma.HomePageSection$itemsArgs<ExtArgs>
   _count?: boolean | Prisma.HomePageSectionCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type HomePageSectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type HomePageSectionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type HomePageSectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
+}
+export type HomePageSectionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  group?: boolean | Prisma.HomePageSection$groupArgs<ExtArgs>
+}
 
 export type $HomePageSectionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HomePageSection"
   objects: {
+    group: Prisma.$HomePageSectionGroupPayload<ExtArgs> | null
     items: Prisma.$HomePageSectionItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -696,6 +925,7 @@ export type $HomePageSectionPayload<ExtArgs extends runtime.Types.Extensions.Int
     config: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
+    groupId: number | null
   }, ExtArgs["result"]["homePageSection"]>
   composites: {}
 }
@@ -1090,6 +1320,7 @@ readonly fields: HomePageSectionFieldRefs;
  */
 export interface Prisma__HomePageSectionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  group<T extends Prisma.HomePageSection$groupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HomePageSection$groupArgs<ExtArgs>>): Prisma.Prisma__HomePageSectionGroupClient<runtime.Types.Result.GetResult<Prisma.$HomePageSectionGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.HomePageSection$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HomePageSection$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomePageSectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1131,6 +1362,7 @@ export interface HomePageSectionFieldRefs {
   readonly config: Prisma.FieldRef<"HomePageSection", 'Json'>
   readonly createdAt: Prisma.FieldRef<"HomePageSection", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"HomePageSection", 'DateTime'>
+  readonly groupId: Prisma.FieldRef<"HomePageSection", 'Int'>
 }
     
 
@@ -1385,6 +1617,10 @@ export type HomePageSectionCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    */
   data: Prisma.HomePageSectionCreateManyInput | Prisma.HomePageSectionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HomePageSectionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1455,6 +1691,10 @@ export type HomePageSectionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types
    * Limit how many HomePageSections to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HomePageSectionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1521,6 +1761,25 @@ export type HomePageSectionDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many HomePageSections to delete.
    */
   limit?: number
+}
+
+/**
+ * HomePageSection.group
+ */
+export type HomePageSection$groupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HomePageSectionGroup
+   */
+  select?: Prisma.HomePageSectionGroupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HomePageSectionGroup
+   */
+  omit?: Prisma.HomePageSectionGroupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HomePageSectionGroupInclude<ExtArgs> | null
+  where?: Prisma.HomePageSectionGroupWhereInput
 }
 
 /**

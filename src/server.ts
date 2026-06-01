@@ -1,16 +1,18 @@
 import 'dotenv/config';
 import express, {type Express, type Request, type Response } from 'express';
 import cors, { type  CorsOptions } from 'cors';
-import productrouter from '#routes/product.js';
+import productrouter from '#routes/admin/product.js';
 // import securityMiddleware from '#middleware/security.js';
 // import { toNodeHandler } from 'better-auth/node';
 // import { auth } from '#lib/auth.js';
-import userRouter from '#routes/user.js';
-import departmentRouter from '#routes/department.js';
-import categoryRouter from '#routes/category.js';
-import cloudinaryRouter from '#routes/cloudinary.js';
-import homeSectionRouter from '#routes/homeSection.js';
-import homeSectionItemsRouter from '#routes/homeSectionItems.js';
+import userRouter from '#routes/admin/user.js';
+import departmentRouter from '#routes/admin/department.js';
+import categoryRouter from '#routes/admin/category.js';
+import cloudinaryRouter from '#routes/admin/cloudinary.js';
+import homeSectionRouter from '#routes/admin/homeSection.js';
+import homeSectionItemsRouter from '#routes/admin/homeSectionItems.js';
+import homeSectionGroupRouter from '#routes/admin/homeSectionGroup.js';
+import homePageRouter from '#routes/public/home.js';
 
 const app: Express = express();
 
@@ -46,6 +48,10 @@ app.use('/api/cloudinary', cloudinaryRouter);
 app.use('/api/homePageSections', homeSectionRouter);
 
 app.use('/api/homePageSectionItems', homeSectionItemsRouter);
+
+app.use('/api/homePageSectionGroups', homeSectionGroupRouter);
+
+app.use('/public/homepage', homePageRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 
