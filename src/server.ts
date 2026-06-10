@@ -13,13 +13,17 @@ import homeSectionRouter from '#routes/admin/homeSection.js';
 import homeSectionItemsRouter from '#routes/admin/homeSectionItems.js';
 import homeSectionGroupRouter from '#routes/admin/homeSectionGroup.js';
 import homePageRouter from '#routes/public/home.js';
+import productDetailsRouter from '#routes/public/products.js'
 
 const app: Express = express();
 
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const adminUrl = process.env.ADMIN_URL || 'http://localhost:5173';
+
 const corsOptions: CorsOptions = {
-  origin: process.env.FRONTEND_URL, 
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],  
-  credentials: true,              
+  origin: [frontendUrl, adminUrl],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true,
   optionsSuccessStatus: 200
 };
 
@@ -52,6 +56,8 @@ app.use('/api/homePageSectionItems', homeSectionItemsRouter);
 app.use('/api/homePageSectionGroups', homeSectionGroupRouter);
 
 app.use('/public/homepage', homePageRouter);
+
+app.use('/public/products', productDetailsRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 

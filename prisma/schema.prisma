@@ -105,6 +105,7 @@ model Product {
   name           String  
   slug           String    @unique
   description    Json      @db.JsonB
+  descriptionHtml String   @default("")
   images         ProductImage[]
   departmentId   Int
   department     Department @relation(fields: [departmentId], references: [id])

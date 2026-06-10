@@ -133,6 +133,7 @@ router.post("/", async (req, res) => {
             name,
             slug,
             description,
+            descriptionHtml,
             departmentId,
             categoryId,
             status = 'active',
@@ -177,6 +178,7 @@ router.post("/", async (req, res) => {
                 name,
                 slug,
                 description: description || {},
+                descriptionHtml: descriptionHtml || '',
                 departmentId: Number(departmentId),
                 categoryId: Number(categoryId),
                 status,
@@ -662,6 +664,7 @@ router.patch("/:id", async (req, res) => {
             name,
             slug,
             description,
+            descriptionHtml,
             departmentId,
             categoryId,
             status,
@@ -716,6 +719,7 @@ router.patch("/:id", async (req, res) => {
         if (name !== undefined) updateData.name = name;
         if (slug !== undefined) updateData.slug = slug;
         if (description !== undefined) updateData.description = description;
+        if (descriptionHtml !== undefined) updateData.descriptionHtml = descriptionHtml;
         if (departmentId !== undefined) updateData.departmentId = Number(departmentId);
         if (categoryId !== undefined) updateData.categoryId = Number(categoryId);
         if (status !== undefined) updateData.status = status;
