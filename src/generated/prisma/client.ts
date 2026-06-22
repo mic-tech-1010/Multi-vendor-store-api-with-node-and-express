@@ -102,6 +102,16 @@ export type HomePageSection = Prisma.HomePageSectionModel
  */
 export type HomePageSectionItem = Prisma.HomePageSectionItemModel
 /**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
+/**
  * Model Session
  * 
  */

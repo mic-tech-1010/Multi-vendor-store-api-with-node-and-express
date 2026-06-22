@@ -53,6 +53,7 @@ model User {
   accounts        Account[]
   productsCreated Product[] @relation("ProductCreatedBy")
   productsUpdated Product[] @relation("ProductUpdatedBy")
+  cart            Cart?
 }
 
 model Department {
@@ -128,6 +129,7 @@ model Product {
   attributes      ProductAttribute[]
   skus            ProductSku[]
   sectionItems HomePageSectionItem[]
+  cartItems    CartItem[]
 
   @@index([status])
   @@index([hasVariations])
@@ -262,6 +264,37 @@ model HomePageSectionItem {
   @@unique([sectionId, productId])
   @@unique([sectionId, categoryId])
   @@unique([sectionId, position])
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+
+  guestToken String? @unique
+
+  userId      String?   @db.Text @unique
+  user    User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  items CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id            Int @id @default(autoincrement())
+  
+  productId     Int
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  cartId    Int
+  cart      Cart @relation(fields: [cartId], references: [id])
+
+  quantity Int
+  price          Decimal   @db.Decimal(20, 4)
+  productSkuId    Int?
+
+  saveForLater Boolean @default(false)
+   
 }
 
 model Session {

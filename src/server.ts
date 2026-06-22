@@ -3,8 +3,8 @@ import express, {type Express, type Request, type Response } from 'express';
 import cors, { type  CorsOptions } from 'cors';
 import productrouter from '#routes/admin/product.js';
 // import securityMiddleware from '#middleware/security.js';
-// import { toNodeHandler } from 'better-auth/node';
-// import { auth } from '#lib/auth.js';
+import { toNodeHandler, fromNodeHeaders } from 'better-auth/node';
+import { auth } from '#lib/auth.js';
 import userRouter from '#routes/admin/user.js';
 import departmentRouter from '#routes/admin/department.js';
 import categoryRouter from '#routes/admin/category.js';
@@ -14,6 +14,11 @@ import homeSectionItemsRouter from '#routes/admin/homeSectionItems.js';
 import homeSectionGroupRouter from '#routes/admin/homeSectionGroup.js';
 import homePageRouter from '#routes/public/home.js';
 import productDetailsRouter from '#routes/public/products.js'
+import { createCartRouter } from '#routes/public/cart.js';
+import { prisma } from '#db/prisma.js';
+import CartService from '#services/cartService.js';
+import { authMiddleware } from "./middleware/authMiddleware";
+import cookieParser from 'cookie-parser';
 
 const app: Express = express();
 
@@ -27,17 +32,19 @@ const corsOptions: CorsOptions = {
   optionsSuccessStatus: 200
 };
 
-app.use(cors(corsOptions));
+const cartService  = new CartService(prisma);
 
-// app.all('/api/auth/*splat', toNodeHandler(auth));
+app.use(cookieParser());
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
-// app.use(securityMiddleware);
+// app.use(authMiddleware);
 
-app.get('/api/data', (req: Request, res: Response) => {
-  res.json({ message: "Hello from Express!" });
-});
+app.all('/api/auth/*splat', toNodeHandler(auth));
+
+// app.use(securityMiddleware);
 
 app.use('/api/products', productrouter);
 
@@ -58,6 +65,8 @@ app.use('/api/homePageSectionGroups', homeSectionGroupRouter);
 app.use('/public/homepage', homePageRouter);
 
 app.use('/public/products', productDetailsRouter);
+
+app.use ('/public/cart', createCartRouter(cartService));
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 

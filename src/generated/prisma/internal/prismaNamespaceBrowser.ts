@@ -63,6 +63,8 @@ export const ModelName = {
   HomePageSectionGroup: 'HomePageSectionGroup',
   HomePageSection: 'HomePageSection',
   HomePageSectionItem: 'HomePageSectionItem',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -261,6 +263,30 @@ export const HomePageSectionItemScalarFieldEnum = {
 } as const
 
 export type HomePageSectionItemScalarFieldEnum = (typeof HomePageSectionItemScalarFieldEnum)[keyof typeof HomePageSectionItemScalarFieldEnum]
+
+
+export const CartScalarFieldEnum = {
+  id: 'id',
+  guestToken: 'guestToken',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
+
+
+export const CartItemScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  cartId: 'cartId',
+  quantity: 'quantity',
+  price: 'price',
+  productSkuId: 'productSkuId',
+  saveForLater: 'saveForLater'
+} as const
+
+export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typeof CartItemScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
