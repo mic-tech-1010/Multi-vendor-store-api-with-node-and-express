@@ -2,7 +2,7 @@ import { type Request, type Response, type NextFunction } from "express";
 import { auth } from "#lib/auth.js";
 import { fromNodeHeaders } from "better-auth/node";
 
-export async function authMiddleware(
+export async function userDataMiddleware(
     req: Request,
     res: Response,
     next: NextFunction
@@ -13,12 +13,12 @@ export async function authMiddleware(
         });
 
         if (!session) {
-            return res.status(401).json({ message: "Unauthorized" });
+            req.user = null;
+            return next();
         }
 
         req.user = {
-            role: session.user.role as "admin" | "vendor" | "customer",
-            data: session.user,
+            data: session?.user,
         };
 
         return next(); 

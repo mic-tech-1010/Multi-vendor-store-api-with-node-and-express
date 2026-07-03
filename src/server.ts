@@ -17,7 +17,6 @@ import productDetailsRouter from '#routes/public/products.js'
 import { createCartRouter } from '#routes/public/cart.js';
 import { prisma } from '#db/prisma.js';
 import CartService from '#services/cartService.js';
-import { authMiddleware } from "./middleware/authMiddleware";
 import cookieParser from 'cookie-parser';
 
 const app: Express = express();
@@ -39,8 +38,6 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 
 app.use(express.json());
-
-// app.use(authMiddleware);
 
 app.all('/api/auth/*splat', toNodeHandler(auth));
 
