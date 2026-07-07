@@ -48,5 +48,47 @@ export function createCartRouter(cartService: CartService) {
         }
     });
 
+    router.delete('/items/:itemId', async (req, res) => {
+        try {
+            const userId = req.user?.data?.id;
+            const itemId = parseInt(req.params.itemId, 10);
+
+            const result = await cartService.removeItem({
+                userId,
+                guestToken: req.cookies.cartToken,
+                cartItemId: itemId,
+            });
+
+            return res.status(200).json({
+                message: result,
+            });
+
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
+    router.put('/items/:itemId', async (req, res) => {
+        try {
+            const userId = req.user?.data?.id;
+            const itemId = parseInt(req.params.itemId, 10);
+            const quantity = req.body.quantity;
+
+            const result = await cartService.updateItem({
+                userId,
+                guestToken: req.cookies.cartToken,
+                cartItemId: itemId,
+                quantity,
+            });
+
+            return res.status(200).json({
+                message: result,
+            });
+
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
     return router;
 }

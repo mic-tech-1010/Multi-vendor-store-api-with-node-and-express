@@ -1,5 +1,4 @@
 
-import type { Prisma } from "#generated/prisma/client.js";
 import type { Product } from "#type.js";
 import { type Response } from "express";
 
@@ -38,7 +37,6 @@ export default class CartService {
     }
 
     const sku = product.skus.find((sku: any) => sku.id === skuId);
-
 
     //FIND OR CREATE CART
     const cart = await this.getActiveUserCart(response, userId, guestToken);
@@ -132,68 +130,164 @@ export default class CartService {
 
   }
 
-  async updateItem(params: {
-    userId?: string;
-    guestToken?: string;
+  async updateItem({
+    userId,
+    guestToken,
+    cartItemId,
+    quantity,
+  }: {
+    userId: string;
+    guestToken: string;
     cartItemId: number;
     quantity: number;
   }) {
-    throw new Error("not implemented");
+    const cart = await this.findOrCreateCart({ userId, guestToken });
+
+    if (!cart) {
+      throw new Error("Cart not found");
+    }
+
+    const item = await this.prisma.cartItem.findFirst({
+      where: {
+        id: cartItemId,
+        cartId: cart.id,
+      },
+    });
+
+    if (!item) {
+      throw new Error("Cart item not found");
+    }
+
+    await this.prisma.cartItem.update({
+      where: { id: item.id },
+      data: { quantity },
+    });
+
+    return "Item quantity updated successfully";
   }
 
-  async removeItem(params: {
-    userId?: string;
-    guestToken?: string;
+  async removeItem({
+    userId,
+    guestToken,
+    cartItemId,
+  }: {
+    userId: string;
+    guestToken: string;
     cartItemId: number;
   }) {
-    throw new Error("not implemented");
+    const cart = await this.findOrCreateCart({ userId, guestToken });
+
+    if (!cart) {
+      throw new Error("Cart not found");
+    }
+
+    const item = await this.prisma.cartItem.findFirst({
+      where: {
+        id: cartItemId,
+        cartId: cart.id,
+      },
+    });
+
+    if (!item) {
+      throw new Error("Cart item not found");
+    }
+
+    await this.prisma.cartItem.delete({
+      where: { id: item.id },
+    });
+
+    return "Item removed from cart successfully";
   }
 
   async getCartSummary({
-  userId,
-  guestToken,
-}: {
-  userId: string;
-  guestToken: string;
-}) {
-  if (!userId && !guestToken) {
+    userId,
+    guestToken,
+  }: {
+    userId: string;
+    guestToken: string;
+  }) {
+    const cart = await this.findOrCreateCart({ userId, guestToken });
+
+    if (!cart) {
+      throw new Error("Cart not found");
+    }
+
+    const items = await this.prisma.cartItem.findMany({
+      where: { cartId: cart.id },
+      include: {
+        product: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            price: true,
+            status: true,
+            quantity: true,
+
+            images: {
+              where: {
+                isPrimary: true,
+              },
+              take: 1,
+              select: {
+                imageUrl: true,
+              },
+            },
+
+            skus: {
+              select: {
+                id: true,
+                sku: true,
+                price: true,
+                quantity: true,
+
+                attributeValues: {
+                  select: {
+                    id: true,
+                    value: true,
+
+                    productAttribute: {
+                      select: {
+                        id: true,
+                        name: true,
+                      },
+                    },
+
+                    images: {
+                      orderBy: {
+                        order: "asc",
+                      },
+
+                      select: {
+                        id: true,
+                        imageUrl: true,
+                        imageAltText: true,
+                        isPrimary: true,
+                        order: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+
+
+          },
+        },
+      },
+    });
+
+    const subtotal = items.reduce((sum: number, item: any) => {
+      return sum + Number(item.price) * item.quantity;
+    }, 0);
+
     return {
-      cartId: null,
-      items: [],
-      itemCount: 0,
-      subtotal: 0,
+      cartId: cart.id,
+      items,
+      itemCount: items.length,
+      subtotal,
     };
   }
-
-  const cart = await this.findOrCreateCart({ userId, guestToken });
-
-  if (!cart) {
-    return {
-      cartId: null,
-      items: [],
-      itemCount: 0,
-      subtotal: 0,
-    };
-  }
-
-  const items = await this.prisma.cartItem.findMany({
-    where: { cartId: cart.id },
-    include: {
-      product: true,
-    },
-  });
-
-  const subtotal = items.reduce((sum: number, item: any) => {
-    return sum + Number(item.price) * item.quantity;
-  }, 0);
-
-  return {
-    cartId: cart.id,
-    items,
-    itemCount: items.length,
-    subtotal,
-  };
-}
 
 
   // -------------------------
@@ -279,7 +373,4 @@ export default class CartService {
     return cart;
   }
 
-  private async calculateTotals(cartId: number) {
-    throw new Error("not implemented");
-  }
 }
