@@ -136,11 +136,15 @@ export default class CartService {
     cartItemId,
     quantity,
   }: {
-    userId: string;
-    guestToken: string;
+    userId: string | undefined;
+    guestToken: string | undefined;
     cartItemId: number;
     quantity: number;
   }) {
+    if (quantity < 1) {
+      throw new Error("Quantity must be at least 1");
+    }
+
     const cart = await this.findOrCreateCart({ userId, guestToken });
 
     if (!cart) {
@@ -152,10 +156,39 @@ export default class CartService {
         id: cartItemId,
         cartId: cart.id,
       },
+      include: {
+        product: {
+          include: {
+            skus: true,
+          },
+        },
+      },
     });
 
     if (!item) {
       throw new Error("Cart item not found");
+    }
+
+    // SKU / variation item
+    if (item.productSkuId) {
+      const sku = item.product.skus.find(
+        (sku: any) => sku.id === item.productSkuId
+      );
+
+      if (!sku) {
+        throw new Error("Product SKU not found");
+      }
+
+      if (sku.quantity < quantity) {
+        throw new Error("Insufficient stock for the selected SKU");
+      }
+    }
+
+    // Simple product item
+    else {
+      if ((item.product.quantity ?? 0) < quantity) {
+        throw new Error("Insufficient stock for the selected product");
+      }
     }
 
     await this.prisma.cartItem.update({
@@ -171,8 +204,8 @@ export default class CartService {
     guestToken,
     cartItemId,
   }: {
-    userId: string;
-    guestToken: string;
+    userId?: string;
+    guestToken?: string;
     cartItemId: number;
   }) {
     const cart = await this.findOrCreateCart({ userId, guestToken });
@@ -200,20 +233,22 @@ export default class CartService {
   }
 
   async getCartSummary({
+    response,
     userId,
     guestToken,
   }: {
-    userId: string;
-    guestToken: string;
+    response: Response;
+    userId?: string;
+    guestToken?: string;
   }) {
-    const cart = await this.findOrCreateCart({ userId, guestToken });
 
-    if (!cart) {
-      throw new Error("Cart not found");
-    }
+    const cart = await this.getActiveUserCart(response, userId, guestToken);
 
     const items = await this.prisma.cartItem.findMany({
       where: { cartId: cart.id },
+      orderBy: {
+        createdAt: 'asc',
+      },
       include: {
         product: {
           select: {
@@ -289,7 +324,6 @@ export default class CartService {
     };
   }
 
-
   // -------------------------
   // MERGE LOGIC (IMPORTANT)
   // -------------------------
@@ -297,14 +331,209 @@ export default class CartService {
     userId: string;
     guestToken: string;
   }) {
-    throw new Error("not implemented");
+    const { userId, guestToken } = params;
+
+    return await this.prisma.$transaction(async (tx: any) => {
+      const guestCart = await tx.cart.findUnique({
+        where: { guestToken },
+        include: {
+          items: true,
+        },
+      });
+
+      // No guest cart -> just ensure user has a cart
+      if (!guestCart) {
+        let userCart = await tx.cart.findUnique({
+          where: { userId },
+        });
+
+        if (!userCart) {
+          userCart = await tx.cart.create({
+            data: { userId },
+          });
+        }
+
+        return userCart;
+      }
+
+      const existingUserCart = await tx.cart.findUnique({
+        where: { userId },
+        include: {
+          items: true,
+        },
+      });
+
+      // ---------------------------------------------------
+      // CASE 1: User has NO cart yet
+      // Claim guest cart for the user
+      // ---------------------------------------------------
+      if (!existingUserCart) {
+        // validate all guest cart items against stock before claiming
+        for (const guestItem of guestCart.items) {
+          // SKU item
+          if (guestItem.productSkuId) {
+            const sku = await tx.productSku.findUnique({
+              where: { id: guestItem.productSkuId },
+              include: {
+                product: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            });
+
+            if (!sku) {
+              throw new Error("Product SKU not found during cart merge");
+            }
+
+            if (guestItem.quantity > sku.quantity) {
+              throw new Error(
+                `Cannot merge cart: only ${sku.quantity} unit(s) available for SKU ${sku.sku}`
+              );
+            }
+          }
+
+          // Simple product item
+          else {
+            const product = await tx.product.findUnique({
+              where: { id: guestItem.productId },
+              select: {
+                name: true,
+                quantity: true,
+              },
+            });
+
+            if (!product) {
+              throw new Error("Product not found during cart merge");
+            }
+
+            if ((product.quantity ?? 0) < guestItem.quantity) {
+              throw new Error(
+                `Cannot merge cart: only ${product.quantity ?? 0} unit(s) available for ${product.name}`
+              );
+            }
+          }
+        }
+
+        const claimedCart = await tx.cart.update({
+          where: { id: guestCart.id },
+          data: {
+            userId,
+            guestToken: null,
+          },
+        });
+
+        return claimedCart;
+      }
+
+      // ---------------------------------------------------
+      // CASE 2: User already has a cart
+      // Merge guest cart items into existing user cart
+      // ---------------------------------------------------
+      for (const guestItem of guestCart.items) {
+        const existingItem = await tx.cartItem.findFirst({
+          where: {
+            cartId: existingUserCart.id,
+            productId: guestItem.productId,
+            productSkuId: guestItem.productSkuId ?? null,
+          },
+        });
+
+        // ============================================
+        // SKU ITEM MERGE
+        // ============================================
+        if (guestItem.productSkuId) {
+          const sku = await tx.productSku.findUnique({
+            where: { id: guestItem.productSkuId },
+            include: {
+              product: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          });
+
+          if (!sku) {
+            throw new Error("Product SKU not found during cart merge");
+          }
+
+          const mergedQty = existingItem
+            ? existingItem.quantity + guestItem.quantity
+            : guestItem.quantity;
+
+          if (mergedQty > sku.quantity) {
+            throw new Error(
+              `Cannot merge cart: only ${sku.quantity} unit(s) available for SKU ${sku.sku}`
+            );
+          }
+        }
+
+        // ============================================
+        // SIMPLE PRODUCT MERGE
+        // ============================================
+        else {
+          const product = await tx.product.findUnique({
+            where: { id: guestItem.productId },
+            select: {
+              name: true,
+              quantity: true,
+            },
+          });
+
+          if (!product) {
+            throw new Error("Product not found during cart merge");
+          }
+
+          const mergedQty = existingItem
+            ? existingItem.quantity + guestItem.quantity
+            : guestItem.quantity;
+
+          if (mergedQty > (product.quantity ?? 0)) {
+            throw new Error(
+              `Cannot merge cart: only ${product.quantity ?? 0} unit(s) available for ${product.name}`
+            );
+          }
+        }
+
+        // ============================================
+        // AFTER STOCK VALIDATION -> DO THE MERGE
+        // ============================================
+        if (existingItem) {
+          await tx.cartItem.update({
+            where: { id: existingItem.id },
+            data: {
+              quantity: existingItem.quantity + guestItem.quantity,
+            },
+          });
+
+          await tx.cartItem.delete({
+            where: { id: guestItem.id },
+          });
+        } else {
+          await tx.cartItem.update({
+            where: { id: guestItem.id },
+            data: {
+              cartId: existingUserCart.id,
+            },
+          });
+        }
+      }
+
+      await tx.cart.delete({
+        where: { id: guestCart.id },
+      });
+
+      return existingUserCart;
+    });
   }
 
   // -------------------------
   // INTERNAL HELPERS
   // -------------------------
 
-  private async findOrCreateCart(props: { userId?: string; guestToken?: string }) {
+  private async findOrCreateCart(props: { userId: string | undefined; guestToken: string | undefined }) {
     const { userId, guestToken } = props;
 
     if (userId) {
@@ -342,17 +571,16 @@ export default class CartService {
     // AUTH USER CART
     if (userId) {
 
-      const cart = this.findOrCreateCart({ userId });
-
-      response?.clearCookie('cartToken')
+      const cart = this.findOrCreateCart({ userId, guestToken: undefined });
 
       return cart;
+
     }
 
     // GUEST CART
     if (guestToken) {
 
-      const cart = this.findOrCreateCart({ guestToken });
+      const cart = this.findOrCreateCart({ userId: undefined, guestToken });
 
       return cart;
     }

@@ -294,6 +294,10 @@ model CartItem {
   productSkuId    Int?
 
   saveForLater Boolean @default(false)
+
+  createdAt     DateTime @default(now())
+
+  @@index([cartId])
    
 }
 

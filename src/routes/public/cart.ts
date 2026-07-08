@@ -5,13 +5,16 @@ import { userDataMiddleware } from '#middleware/authMiddleware.js';
 export function createCartRouter(cartService: CartService) {
     const router = express.Router();
 
+    // Apply user data middleware to all routes in this router
     router.use(userDataMiddleware);
 
+    // Get cart summary
     router.get('/', async (req, res) => {
         try {
             const userId = req.user?.data?.id;
-        
+
             const result = await cartService.getCartSummary({
+                response: res,
                 userId,
                 guestToken: req.cookies.cartToken,
             });
@@ -25,6 +28,7 @@ export function createCartRouter(cartService: CartService) {
         }
     });
 
+    // Add item to cart
     router.post('/items', async (req, res) => {
         try {
 
@@ -48,6 +52,7 @@ export function createCartRouter(cartService: CartService) {
         }
     });
 
+    //delete cart item
     router.delete('/items/:itemId', async (req, res) => {
         try {
             const userId = req.user?.data?.id;
@@ -68,6 +73,7 @@ export function createCartRouter(cartService: CartService) {
         }
     });
 
+    // Update cart item quantity
     router.put('/items/:itemId', async (req, res) => {
         try {
             const userId = req.user?.data?.id;
@@ -83,6 +89,30 @@ export function createCartRouter(cartService: CartService) {
 
             return res.status(200).json({
                 message: result,
+            });
+
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
+    // Merge guest cart to user cart
+    router.post('/merge', async (req, res) => {
+        try {
+            const userId = req.user?.data?.id;
+            const guestToken = req.cookies.cartToken;
+
+            const result = await cartService.mergeGuestCartToUser({
+                userId,
+                guestToken,
+            });
+
+            // Clear the guest cart cookie only after successful merge
+            res.clearCookie('cartToken');
+
+            return res.status(200).json({
+                data: result,
+                success: true,
             });
 
         } catch (error) {
