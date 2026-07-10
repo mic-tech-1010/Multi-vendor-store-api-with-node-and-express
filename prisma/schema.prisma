@@ -35,6 +35,54 @@ enum HomePageSectionLayout {
   horizontal_scroll
 }
 
+enum AddressType {
+  home
+  office
+  other
+}
+
+enum DeliveryAreaStatus {
+  active
+  inactive
+}
+
+enum OrderStatus {
+  pending
+  confirmed
+  processing
+  shipped
+  out_for_delivery
+  delivered
+  cancelled
+  refunded
+}
+
+enum PaymentStatus {
+  pending
+  processing
+  paid
+  failed
+  refunded
+  partially_refunded
+}
+
+enum DeliveryStatus {
+  pending
+  assigned
+  dispatched
+  in_transit
+  delivered
+  failed
+  returned
+}
+
+enum PaymentGateway {
+  paystack
+  flutterwave
+  stripe
+  pay_on_delivery
+}
+
 model User {
   id              String   @id @db.Text
   name            String
@@ -54,6 +102,8 @@ model User {
   productsCreated Product[] @relation("ProductCreatedBy")
   productsUpdated Product[] @relation("ProductUpdatedBy")
   cart            Cart?
+  addresses        Address[]
+  orders           Order[]
 }
 
 model Department {
@@ -130,6 +180,7 @@ model Product {
   skus            ProductSku[]
   sectionItems HomePageSectionItem[]
   cartItems    CartItem[]
+  orderItems       OrderItem[]
 
   @@index([status])
   @@index([hasVariations])
@@ -199,6 +250,8 @@ model ProductSku {
   createdAt           DateTime               @default(now())
   updatedAt           DateTime               @updatedAt
   attributeValues     ProductAttributeValue[]
+
+  orderItems       OrderItem[]
 }
 
 model HomePageSectionGroup {
@@ -299,6 +352,195 @@ model CartItem {
 
   @@index([cartId])
    
+}
+
+model DeliveryArea {
+  id                Int                 @id @default(autoincrement())
+  name              String              @unique
+  slug              String              @unique
+
+  // Delivery pricing
+  baseFee           Decimal             @db.Decimal(20, 4)
+
+  // Delivery time estimate
+  minDeliveryDays   Int?
+  maxDeliveryDays   Int?
+  minDeliveryHours  Int?
+  maxDeliveryHours  Int?
+
+  // Optional free delivery threshold
+  freeDeliveryFrom  Decimal?            @db.Decimal(20, 4)
+
+  // Optional geofencing / map support
+  latitude          Decimal?            @db.Decimal(10, 7)
+  longitude         Decimal?            @db.Decimal(10, 7)
+  radiusKm          Decimal?            @db.Decimal(10, 2)
+
+  status            DeliveryAreaStatus  @default(active)
+
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  addresses         Address[]
+  orders            Order[]
+}
+
+model Address {
+  id                 Int           @id @default(autoincrement())
+
+  userId             String        @db.Text
+  user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  deliveryAreaId     Int?
+  deliveryArea       DeliveryArea? @relation(fields: [deliveryAreaId], references: [id])
+
+  firstName          String
+  lastName           String?
+  email              String
+  phone              String
+
+  addressLine1       String
+  addressLine2       String?
+  city               String?
+  state              String?
+  postalCode         String?
+  country            String?       @default("Nigeria")
+
+  landmark           String?
+  label              String?       // e.g. Home, Office
+  type               AddressType?  // home / office / other
+  notes              String?       // delivery instruction
+
+  // map / geocode fields
+  latitude           Decimal?      @db.Decimal(10, 7)
+  longitude          Decimal?      @db.Decimal(10, 7)
+  placeId            String?
+  formattedAddress   String?
+
+  isDefault          Boolean       @default(false)
+
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  orders             Order[]
+
+  @@index([userId])
+  @@index([deliveryAreaId])
+}
+
+model Order {
+  id                   Int             @id @default(autoincrement())
+
+  invoiceId            String          @unique
+
+  userId               String          @db.Text
+  user                 User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Optional reference to saved address used for this order
+  addressId            Int?
+  address              Address?        @relation(fields: [addressId], references: [id])
+
+  // Snapshot of the address at order time
+  addressSnapshot      Json            @db.JsonB
+
+  deliveryAreaId       Int?
+  deliveryArea         DeliveryArea?   @relation(fields: [deliveryAreaId], references: [id])
+
+  discount             Decimal         @default(0) @db.Decimal(20, 4)
+  deliveryCharge       Decimal         @default(0) @db.Decimal(20, 4)
+  subtotal             Decimal         @db.Decimal(20, 4)
+  grandTotal           Decimal         @db.Decimal(20, 4)
+  productQty           Int
+
+  currency             String?         @default("NGN")
+
+  paymentGateway       PaymentGateway?
+  paymentMethod        String?         // optional display label
+  paymentStatus        PaymentStatus   @default(pending)
+  paidAt               DateTime?
+  transactionId        String?
+
+  couponCode           String?
+  couponInfo           Json?           @db.JsonB
+
+  orderStatus          OrderStatus     @default(pending)
+  deliveryStatus       DeliveryStatus  @default(pending)
+
+  deliveredAt          DateTime?
+  cancelledAt          DateTime?
+  cancellationReason   String?
+
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  items                OrderItem[]
+  payments             PaymentTransaction[]
+
+  @@index([userId])
+  @@index([invoiceId])
+  @@index([paymentStatus])
+  @@index([orderStatus])
+  @@index([deliveryStatus])
+  @@index([deliveryAreaId])
+}
+
+model OrderItem {
+  id                     Int         @id @default(autoincrement())
+
+  orderId                Int
+  order                  Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId              Int
+  product                Product     @relation(fields: [productId], references: [id])
+
+  // if product has variations, store the exact SKU purchased
+  productSkuId           Int?
+  productSku             ProductSku? @relation(fields: [productSkuId], references: [id])
+
+  // snapshot fields so order history survives product edits/deletes
+  productName            String
+  productSlug            String?
+  productImageUrl        String?
+
+  unitPrice              Decimal     @db.Decimal(20, 4)
+  quantity               Int
+  lineTotal              Decimal     @db.Decimal(20, 4)
+
+  // snapshot of chosen variation values, e.g. Size=XL, Color=Black
+  selectedAttributes     Json?       @db.JsonB
+
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+
+  @@index([orderId])
+  @@index([productId])
+  @@index([productSkuId])
+}
+
+model PaymentTransaction {
+  id                    Int             @id @default(autoincrement())
+
+  orderId               Int
+  order                 Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  gateway               PaymentGateway
+  reference             String?         @unique
+  transactionId         String?
+  providerResponse      Json?           @db.JsonB
+
+  amount                Decimal         @db.Decimal(20, 4)
+  currency              String          @default("NGN")
+
+  status                PaymentStatus   @default(pending)
+  paidAt                DateTime?
+  failedAt              DateTime?
+
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  @@index([orderId])
+  @@index([gateway])
+  @@index([status])
 }
 
 model Session {

@@ -38,3 +38,69 @@ export const HomePageSectionLayout = {
 } as const
 
 export type HomePageSectionLayout = (typeof HomePageSectionLayout)[keyof typeof HomePageSectionLayout]
+
+
+export const AddressType = {
+  home: 'home',
+  office: 'office',
+  other: 'other'
+} as const
+
+export type AddressType = (typeof AddressType)[keyof typeof AddressType]
+
+
+export const DeliveryAreaStatus = {
+  active: 'active',
+  inactive: 'inactive'
+} as const
+
+export type DeliveryAreaStatus = (typeof DeliveryAreaStatus)[keyof typeof DeliveryAreaStatus]
+
+
+export const OrderStatus = {
+  pending: 'pending',
+  confirmed: 'confirmed',
+  processing: 'processing',
+  shipped: 'shipped',
+  out_for_delivery: 'out_for_delivery',
+  delivered: 'delivered',
+  cancelled: 'cancelled',
+  refunded: 'refunded'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const PaymentStatus = {
+  pending: 'pending',
+  processing: 'processing',
+  paid: 'paid',
+  failed: 'failed',
+  refunded: 'refunded',
+  partially_refunded: 'partially_refunded'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const DeliveryStatus = {
+  pending: 'pending',
+  assigned: 'assigned',
+  dispatched: 'dispatched',
+  in_transit: 'in_transit',
+  delivered: 'delivered',
+  failed: 'failed',
+  returned: 'returned'
+} as const
+
+export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus]
+
+
+export const PaymentGateway = {
+  paystack: 'paystack',
+  flutterwave: 'flutterwave',
+  stripe: 'stripe',
+  pay_on_delivery: 'pay_on_delivery'
+} as const
+
+export type PaymentGateway = (typeof PaymentGateway)[keyof typeof PaymentGateway]

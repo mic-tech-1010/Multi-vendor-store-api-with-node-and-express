@@ -65,6 +65,11 @@ export const ModelName = {
   HomePageSectionItem: 'HomePageSectionItem',
   Cart: 'Cart',
   CartItem: 'CartItem',
+  DeliveryArea: 'DeliveryArea',
+  Address: 'Address',
+  Order: 'Order',
+  OrderItem: 'OrderItem',
+  PaymentTransaction: 'PaymentTransaction',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -288,6 +293,127 @@ export const CartItemScalarFieldEnum = {
 } as const
 
 export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typeof CartItemScalarFieldEnum]
+
+
+export const DeliveryAreaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  baseFee: 'baseFee',
+  minDeliveryDays: 'minDeliveryDays',
+  maxDeliveryDays: 'maxDeliveryDays',
+  minDeliveryHours: 'minDeliveryHours',
+  maxDeliveryHours: 'maxDeliveryHours',
+  freeDeliveryFrom: 'freeDeliveryFrom',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  radiusKm: 'radiusKm',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliveryAreaScalarFieldEnum = (typeof DeliveryAreaScalarFieldEnum)[keyof typeof DeliveryAreaScalarFieldEnum]
+
+
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  deliveryAreaId: 'deliveryAreaId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  city: 'city',
+  state: 'state',
+  postalCode: 'postalCode',
+  country: 'country',
+  landmark: 'landmark',
+  label: 'label',
+  type: 'type',
+  notes: 'notes',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  placeId: 'placeId',
+  formattedAddress: 'formattedAddress',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  userId: 'userId',
+  addressId: 'addressId',
+  addressSnapshot: 'addressSnapshot',
+  deliveryAreaId: 'deliveryAreaId',
+  discount: 'discount',
+  deliveryCharge: 'deliveryCharge',
+  subtotal: 'subtotal',
+  grandTotal: 'grandTotal',
+  productQty: 'productQty',
+  currency: 'currency',
+  paymentGateway: 'paymentGateway',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus',
+  paidAt: 'paidAt',
+  transactionId: 'transactionId',
+  couponCode: 'couponCode',
+  couponInfo: 'couponInfo',
+  orderStatus: 'orderStatus',
+  deliveryStatus: 'deliveryStatus',
+  deliveredAt: 'deliveredAt',
+  cancelledAt: 'cancelledAt',
+  cancellationReason: 'cancellationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  productSkuId: 'productSkuId',
+  productName: 'productName',
+  productSlug: 'productSlug',
+  productImageUrl: 'productImageUrl',
+  unitPrice: 'unitPrice',
+  quantity: 'quantity',
+  lineTotal: 'lineTotal',
+  selectedAttributes: 'selectedAttributes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  gateway: 'gateway',
+  reference: 'reference',
+  transactionId: 'transactionId',
+  providerResponse: 'providerResponse',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  paidAt: 'paidAt',
+  failedAt: 'failedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

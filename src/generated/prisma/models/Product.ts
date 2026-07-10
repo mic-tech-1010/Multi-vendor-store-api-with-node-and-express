@@ -341,6 +341,7 @@ export type ProductWhereInput = {
   skus?: Prisma.ProductSkuListRelationFilter
   sectionItems?: Prisma.HomePageSectionItemListRelationFilter
   cartItems?: Prisma.CartItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -371,6 +372,7 @@ export type ProductOrderByWithRelationInput = {
   skus?: Prisma.ProductSkuOrderByRelationAggregateInput
   sectionItems?: Prisma.HomePageSectionItemOrderByRelationAggregateInput
   cartItems?: Prisma.CartItemOrderByRelationAggregateInput
+  orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -404,6 +406,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   skus?: Prisma.ProductSkuListRelationFilter
   sectionItems?: Prisma.HomePageSectionItemListRelationFilter
   cartItems?: Prisma.CartItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
 }, "id" | "slug">
 
 export type ProductOrderByWithAggregationInput = {
@@ -479,6 +482,7 @@ export type ProductCreateInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -505,6 +509,7 @@ export type ProductUncheckedCreateInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -530,6 +535,7 @@ export type ProductUpdateInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -556,6 +562,7 @@ export type ProductUncheckedUpdateInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -961,6 +968,20 @@ export type ProductUpdateOneRequiredWithoutCartItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutCartItemsInput, Prisma.ProductUpdateWithoutCartItemsInput>, Prisma.ProductUncheckedUpdateWithoutCartItemsInput>
 }
 
+export type ProductCreateNestedOneWithoutOrderItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemsInput, Prisma.ProductUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutOrderItemsInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneRequiredWithoutOrderItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemsInput, Prisma.ProductUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutOrderItemsInput
+  upsert?: Prisma.ProductUpsertWithoutOrderItemsInput
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.ProductUpdateWithoutOrderItemsInput>, Prisma.ProductUncheckedUpdateWithoutOrderItemsInput>
+}
+
 export type ProductCreateWithoutCreatedByUserInput = {
   name: string
   slug: string
@@ -983,6 +1004,7 @@ export type ProductCreateWithoutCreatedByUserInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCreatedByUserInput = {
@@ -1008,6 +1030,7 @@ export type ProductUncheckedCreateWithoutCreatedByUserInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCreatedByUserInput = {
@@ -1042,6 +1065,7 @@ export type ProductCreateWithoutUpdatedByUserInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutUpdatedByUserInput = {
@@ -1067,6 +1091,7 @@ export type ProductUncheckedCreateWithoutUpdatedByUserInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutUpdatedByUserInput = {
@@ -1157,6 +1182,7 @@ export type ProductCreateWithoutDepartmentInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutDepartmentInput = {
@@ -1182,6 +1208,7 @@ export type ProductUncheckedCreateWithoutDepartmentInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutDepartmentInput = {
@@ -1232,6 +1259,7 @@ export type ProductCreateWithoutCategoryInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -1257,6 +1285,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -1307,6 +1336,7 @@ export type ProductCreateWithoutImagesInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutImagesInput = {
@@ -1332,6 +1362,7 @@ export type ProductUncheckedCreateWithoutImagesInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutImagesInput = {
@@ -1372,6 +1403,7 @@ export type ProductUpdateWithoutImagesInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutImagesInput = {
@@ -1397,6 +1429,7 @@ export type ProductUncheckedUpdateWithoutImagesInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutAttributesInput = {
@@ -1421,6 +1454,7 @@ export type ProductCreateWithoutAttributesInput = {
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutAttributesInput = {
@@ -1446,6 +1480,7 @@ export type ProductUncheckedCreateWithoutAttributesInput = {
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutAttributesInput = {
@@ -1486,6 +1521,7 @@ export type ProductUpdateWithoutAttributesInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutAttributesInput = {
@@ -1511,6 +1547,7 @@ export type ProductUncheckedUpdateWithoutAttributesInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutSkusInput = {
@@ -1535,6 +1572,7 @@ export type ProductCreateWithoutSkusInput = {
   attributes?: Prisma.ProductAttributeCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutSkusInput = {
@@ -1560,6 +1598,7 @@ export type ProductUncheckedCreateWithoutSkusInput = {
   attributes?: Prisma.ProductAttributeUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutSkusInput = {
@@ -1600,6 +1639,7 @@ export type ProductUpdateWithoutSkusInput = {
   attributes?: Prisma.ProductAttributeUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutSkusInput = {
@@ -1625,6 +1665,7 @@ export type ProductUncheckedUpdateWithoutSkusInput = {
   attributes?: Prisma.ProductAttributeUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutSectionItemsInput = {
@@ -1649,6 +1690,7 @@ export type ProductCreateWithoutSectionItemsInput = {
   attributes?: Prisma.ProductAttributeCreateNestedManyWithoutProductInput
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutSectionItemsInput = {
@@ -1674,6 +1716,7 @@ export type ProductUncheckedCreateWithoutSectionItemsInput = {
   attributes?: Prisma.ProductAttributeUncheckedCreateNestedManyWithoutProductInput
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutSectionItemsInput = {
@@ -1714,6 +1757,7 @@ export type ProductUpdateWithoutSectionItemsInput = {
   attributes?: Prisma.ProductAttributeUpdateManyWithoutProductNestedInput
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutSectionItemsInput = {
@@ -1739,6 +1783,7 @@ export type ProductUncheckedUpdateWithoutSectionItemsInput = {
   attributes?: Prisma.ProductAttributeUncheckedUpdateManyWithoutProductNestedInput
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutCartItemsInput = {
@@ -1763,6 +1808,7 @@ export type ProductCreateWithoutCartItemsInput = {
   attributes?: Prisma.ProductAttributeCreateNestedManyWithoutProductInput
   skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCartItemsInput = {
@@ -1788,6 +1834,7 @@ export type ProductUncheckedCreateWithoutCartItemsInput = {
   attributes?: Prisma.ProductAttributeUncheckedCreateNestedManyWithoutProductInput
   skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCartItemsInput = {
@@ -1828,6 +1875,7 @@ export type ProductUpdateWithoutCartItemsInput = {
   attributes?: Prisma.ProductAttributeUpdateManyWithoutProductNestedInput
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCartItemsInput = {
@@ -1853,6 +1901,125 @@ export type ProductUncheckedUpdateWithoutCartItemsInput = {
   attributes?: Prisma.ProductAttributeUncheckedUpdateManyWithoutProductNestedInput
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutOrderItemsInput = {
+  name: string
+  slug: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  descriptionHtml?: string
+  status: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  quantity?: number | null
+  metaTitle?: string | null
+  metaDescription?: string | null
+  hasVariations?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ProductImageCreateNestedManyWithoutProductInput
+  department: Prisma.DepartmentCreateNestedOneWithoutProductsInput
+  category: Prisma.CategoryCreateNestedOneWithoutProductsInput
+  createdByUser: Prisma.UserCreateNestedOneWithoutProductsCreatedInput
+  updatedByUser: Prisma.UserCreateNestedOneWithoutProductsUpdatedInput
+  attributes?: Prisma.ProductAttributeCreateNestedManyWithoutProductInput
+  skus?: Prisma.ProductSkuCreateNestedManyWithoutProductInput
+  sectionItems?: Prisma.HomePageSectionItemCreateNestedManyWithoutProductInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutOrderItemsInput = {
+  id?: number
+  name: string
+  slug: string
+  description: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  descriptionHtml?: string
+  departmentId: number
+  categoryId: number
+  status: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  quantity?: number | null
+  metaTitle?: string | null
+  metaDescription?: string | null
+  hasVariations?: boolean
+  createdBy: string
+  updatedBy: string
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ProductImageUncheckedCreateNestedManyWithoutProductInput
+  attributes?: Prisma.ProductAttributeUncheckedCreateNestedManyWithoutProductInput
+  skus?: Prisma.ProductSkuUncheckedCreateNestedManyWithoutProductInput
+  sectionItems?: Prisma.HomePageSectionItemUncheckedCreateNestedManyWithoutProductInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutOrderItemsInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemsInput, Prisma.ProductUncheckedCreateWithoutOrderItemsInput>
+}
+
+export type ProductUpsertWithoutOrderItemsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutOrderItemsInput, Prisma.ProductUncheckedUpdateWithoutOrderItemsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemsInput, Prisma.ProductUncheckedCreateWithoutOrderItemsInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutOrderItemsInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutOrderItemsInput, Prisma.ProductUncheckedUpdateWithoutOrderItemsInput>
+}
+
+export type ProductUpdateWithoutOrderItemsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  descriptionHtml?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ProductImageUpdateManyWithoutProductNestedInput
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutProductsNestedInput
+  category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
+  createdByUser?: Prisma.UserUpdateOneRequiredWithoutProductsCreatedNestedInput
+  updatedByUser?: Prisma.UserUpdateOneRequiredWithoutProductsUpdatedNestedInput
+  attributes?: Prisma.ProductAttributeUpdateManyWithoutProductNestedInput
+  skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
+  sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutOrderItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  descriptionHtml?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasVariations?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ProductImageUncheckedUpdateManyWithoutProductNestedInput
+  attributes?: Prisma.ProductAttributeUncheckedUpdateManyWithoutProductNestedInput
+  skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
+  sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyCreatedByUserInput = {
@@ -1917,6 +2084,7 @@ export type ProductUpdateWithoutCreatedByUserInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCreatedByUserInput = {
@@ -1942,6 +2110,7 @@ export type ProductUncheckedUpdateWithoutCreatedByUserInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutCreatedByUserInput = {
@@ -1986,6 +2155,7 @@ export type ProductUpdateWithoutUpdatedByUserInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutUpdatedByUserInput = {
@@ -2011,6 +2181,7 @@ export type ProductUncheckedUpdateWithoutUpdatedByUserInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutUpdatedByUserInput = {
@@ -2075,6 +2246,7 @@ export type ProductUpdateWithoutDepartmentInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutDepartmentInput = {
@@ -2100,6 +2272,7 @@ export type ProductUncheckedUpdateWithoutDepartmentInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutDepartmentInput = {
@@ -2164,6 +2337,7 @@ export type ProductUpdateWithoutCategoryInput = {
   skus?: Prisma.ProductSkuUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -2189,6 +2363,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   skus?: Prisma.ProductSkuUncheckedUpdateManyWithoutProductNestedInput
   sectionItems?: Prisma.HomePageSectionItemUncheckedUpdateManyWithoutProductNestedInput
   cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutProductNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -2222,6 +2397,7 @@ export type ProductCountOutputType = {
   skus: number
   sectionItems: number
   cartItems: number
+  orderItems: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2230,6 +2406,7 @@ export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   skus?: boolean | ProductCountOutputTypeCountSkusArgs
   sectionItems?: boolean | ProductCountOutputTypeCountSectionItemsArgs
   cartItems?: boolean | ProductCountOutputTypeCountCartItemsArgs
+  orderItems?: boolean | ProductCountOutputTypeCountOrderItemsArgs
 }
 
 /**
@@ -2277,6 +2454,13 @@ export type ProductCountOutputTypeCountCartItemsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.CartItemWhereInput
 }
 
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderItemWhereInput
+}
+
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2306,6 +2490,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   skus?: boolean | Prisma.Product$skusArgs<ExtArgs>
   sectionItems?: boolean | Prisma.Product$sectionItemsArgs<ExtArgs>
   cartItems?: boolean | Prisma.Product$cartItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -2391,6 +2576,7 @@ export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   skus?: boolean | Prisma.Product$skusArgs<ExtArgs>
   sectionItems?: boolean | Prisma.Product$sectionItemsArgs<ExtArgs>
   cartItems?: boolean | Prisma.Product$cartItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2418,6 +2604,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     skus: Prisma.$ProductSkuPayload<ExtArgs>[]
     sectionItems: Prisma.$HomePageSectionItemPayload<ExtArgs>[]
     cartItems: Prisma.$CartItemPayload<ExtArgs>[]
+    orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2841,6 +3028,7 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   skus<T extends Prisma.Product$skusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$skusArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSkuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sectionItems<T extends Prisma.Product$sectionItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$sectionItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomePageSectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cartItems<T extends Prisma.Product$cartItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$cartItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderItems<T extends Prisma.Product$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3406,6 +3594,30 @@ export type Product$cartItemsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CartItemScalarFieldEnum | Prisma.CartItemScalarFieldEnum[]
+}
+
+/**
+ * Product.orderItems
+ */
+export type Product$orderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderItem
+   */
+  select?: Prisma.OrderItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderItem
+   */
+  omit?: Prisma.OrderItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderItemInclude<ExtArgs> | null
+  where?: Prisma.OrderItemWhereInput
+  orderBy?: Prisma.OrderItemOrderByWithRelationInput | Prisma.OrderItemOrderByWithRelationInput[]
+  cursor?: Prisma.OrderItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
 }
 
 /**
