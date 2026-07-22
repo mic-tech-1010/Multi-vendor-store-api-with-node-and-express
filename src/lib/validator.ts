@@ -1,23 +1,44 @@
-import * as AjvModule from 'ajv';
-import * as addFormatsModule from 'ajv-formats';
-import type { Request, Response } from 'express';
+import * as AjvModule from "ajv";
+import * as addFormatsModule from "ajv-formats";
+import type { RequestHandler } from "express";
 
 const AjvClass = (AjvModule as any).default ?? AjvModule;
 const addFormats = (addFormatsModule as any).default ?? addFormatsModule;
 
-const ajv = new AjvClass({ allErrors: true, useDefaults: true, $data: true });
+const ajv = new AjvClass({
+  allErrors: true,
+  useDefaults: true,
+  coerceTypes: true,
+});
+
 addFormats(ajv);
 
-const validate = (schema: Record<string, unknown>, req: Request, res: Response): boolean => {
-  const validateFunction = ajv.compile(schema);
-  const valid = validateFunction(req.body);
+function createValidator(
+  schema: Record<string, unknown>,
+  target: "body" | "query" | "params"
+): RequestHandler {
+  const validate = ajv.compile(schema);
 
-  if (!valid) {
-    res.status(400).json({ errors: validateFunction.errors });
-    return false;
-  }
+  return (req, res, next) => {
+    const valid = validate(req[target]);
 
-  return true;
-};
+    if (!valid) {
+      return res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: validate.errors,
+      });
+    }
 
-export default validate;
+    next();
+  };
+}
+
+export const validateBody = (schema: Record<string, unknown>) =>
+  createValidator(schema, "body");
+
+export const validateQuery = (schema: Record<string, unknown>) =>
+  createValidator(schema, "query");
+
+export const validateParams = (schema: Record<string, unknown>) =>
+  createValidator(schema, "params");

@@ -17,6 +17,7 @@ import productDetailsRouter from '#routes/public/products.js'
 import { createCartRouter } from '#routes/public/cart.js';
 import { prisma } from '#db/prisma.js';
 import CartService from '#services/cartService.js';
+import locationRouter from '#routes/public/userLocation.js'
 import cookieParser from 'cookie-parser';
 
 const app: Express = express();
@@ -64,6 +65,8 @@ app.use('/public/homepage', homePageRouter);
 app.use('/public/products', productDetailsRouter);
 
 app.use ('/public/cart', createCartRouter(cartService));
+
+app.use("/api/location", locationRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 
