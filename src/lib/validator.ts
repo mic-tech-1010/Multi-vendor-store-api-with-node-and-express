@@ -23,6 +23,8 @@ function createValidator(
     const valid = validate(req[target]);
 
     if (!valid) {
+      // console.log(validate.errors);
+
       return res.status(400).json({
         success: false,
         message: "Validation failed",

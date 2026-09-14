@@ -62,6 +62,9 @@ export type DeliveryAreaMinAggregateOutputType = {
   minDeliveryHours: number | null
   maxDeliveryHours: number | null
   freeDeliveryFrom: runtime.Decimal | null
+  state: string | null
+  city: string | null
+  suburb: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   radiusKm: runtime.Decimal | null
@@ -80,6 +83,9 @@ export type DeliveryAreaMaxAggregateOutputType = {
   minDeliveryHours: number | null
   maxDeliveryHours: number | null
   freeDeliveryFrom: runtime.Decimal | null
+  state: string | null
+  city: string | null
+  suburb: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   radiusKm: runtime.Decimal | null
@@ -98,6 +104,9 @@ export type DeliveryAreaCountAggregateOutputType = {
   minDeliveryHours: number
   maxDeliveryHours: number
   freeDeliveryFrom: number
+  state: number
+  city: number
+  suburb: number
   latitude: number
   longitude: number
   radiusKm: number
@@ -144,6 +153,9 @@ export type DeliveryAreaMinAggregateInputType = {
   minDeliveryHours?: true
   maxDeliveryHours?: true
   freeDeliveryFrom?: true
+  state?: true
+  city?: true
+  suburb?: true
   latitude?: true
   longitude?: true
   radiusKm?: true
@@ -162,6 +174,9 @@ export type DeliveryAreaMaxAggregateInputType = {
   minDeliveryHours?: true
   maxDeliveryHours?: true
   freeDeliveryFrom?: true
+  state?: true
+  city?: true
+  suburb?: true
   latitude?: true
   longitude?: true
   radiusKm?: true
@@ -180,6 +195,9 @@ export type DeliveryAreaCountAggregateInputType = {
   minDeliveryHours?: true
   maxDeliveryHours?: true
   freeDeliveryFrom?: true
+  state?: true
+  city?: true
+  suburb?: true
   latitude?: true
   longitude?: true
   radiusKm?: true
@@ -285,6 +303,9 @@ export type DeliveryAreaGroupByOutputType = {
   minDeliveryHours: number | null
   maxDeliveryHours: number | null
   freeDeliveryFrom: runtime.Decimal | null
+  state: string | null
+  city: string | null
+  suburb: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   radiusKm: runtime.Decimal | null
@@ -326,6 +347,9 @@ export type DeliveryAreaWhereInput = {
   minDeliveryHours?: Prisma.IntNullableFilter<"DeliveryArea"> | number | null
   maxDeliveryHours?: Prisma.IntNullableFilter<"DeliveryArea"> | number | null
   freeDeliveryFrom?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
+  city?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
+  suburb?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
   latitude?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -346,6 +370,9 @@ export type DeliveryAreaOrderByWithRelationInput = {
   minDeliveryHours?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDeliveryHours?: Prisma.SortOrderInput | Prisma.SortOrder
   freeDeliveryFrom?: Prisma.SortOrderInput | Prisma.SortOrder
+  state?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  suburb?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   radiusKm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -369,6 +396,9 @@ export type DeliveryAreaWhereUniqueInput = Prisma.AtLeast<{
   minDeliveryHours?: Prisma.IntNullableFilter<"DeliveryArea"> | number | null
   maxDeliveryHours?: Prisma.IntNullableFilter<"DeliveryArea"> | number | null
   freeDeliveryFrom?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
+  city?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
+  suburb?: Prisma.StringNullableFilter<"DeliveryArea"> | string | null
   latitude?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.DecimalNullableFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -389,6 +419,9 @@ export type DeliveryAreaOrderByWithAggregationInput = {
   minDeliveryHours?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDeliveryHours?: Prisma.SortOrderInput | Prisma.SortOrder
   freeDeliveryFrom?: Prisma.SortOrderInput | Prisma.SortOrder
+  state?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  suburb?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   radiusKm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -415,6 +448,9 @@ export type DeliveryAreaScalarWhereWithAggregatesInput = {
   minDeliveryHours?: Prisma.IntNullableWithAggregatesFilter<"DeliveryArea"> | number | null
   maxDeliveryHours?: Prisma.IntNullableWithAggregatesFilter<"DeliveryArea"> | number | null
   freeDeliveryFrom?: Prisma.DecimalNullableWithAggregatesFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.StringNullableWithAggregatesFilter<"DeliveryArea"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"DeliveryArea"> | string | null
+  suburb?: Prisma.StringNullableWithAggregatesFilter<"DeliveryArea"> | string | null
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.DecimalNullableWithAggregatesFilter<"DeliveryArea"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -432,6 +468,9 @@ export type DeliveryAreaCreateInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -452,6 +491,9 @@ export type DeliveryAreaUncheckedCreateInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -471,6 +513,9 @@ export type DeliveryAreaUpdateInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -491,6 +536,9 @@ export type DeliveryAreaUncheckedUpdateInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -511,6 +559,9 @@ export type DeliveryAreaCreateManyInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -528,6 +579,9 @@ export type DeliveryAreaUpdateManyMutationInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -546,6 +600,9 @@ export type DeliveryAreaUncheckedUpdateManyInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -564,6 +621,9 @@ export type DeliveryAreaCountOrderByAggregateInput = {
   minDeliveryHours?: Prisma.SortOrder
   maxDeliveryHours?: Prisma.SortOrder
   freeDeliveryFrom?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  suburb?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   radiusKm?: Prisma.SortOrder
@@ -595,6 +655,9 @@ export type DeliveryAreaMaxOrderByAggregateInput = {
   minDeliveryHours?: Prisma.SortOrder
   maxDeliveryHours?: Prisma.SortOrder
   freeDeliveryFrom?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  suburb?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   radiusKm?: Prisma.SortOrder
@@ -613,6 +676,9 @@ export type DeliveryAreaMinOrderByAggregateInput = {
   minDeliveryHours?: Prisma.SortOrder
   maxDeliveryHours?: Prisma.SortOrder
   freeDeliveryFrom?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  suburb?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   radiusKm?: Prisma.SortOrder
@@ -692,6 +758,9 @@ export type DeliveryAreaCreateWithoutAddressesInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -711,6 +780,9 @@ export type DeliveryAreaUncheckedCreateWithoutAddressesInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -745,6 +817,9 @@ export type DeliveryAreaUpdateWithoutAddressesInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -764,6 +839,9 @@ export type DeliveryAreaUncheckedUpdateWithoutAddressesInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -782,6 +860,9 @@ export type DeliveryAreaCreateWithoutOrdersInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -801,6 +882,9 @@ export type DeliveryAreaUncheckedCreateWithoutOrdersInput = {
   minDeliveryHours?: number | null
   maxDeliveryHours?: number | null
   freeDeliveryFrom?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: string | null
+  city?: string | null
+  suburb?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -835,6 +919,9 @@ export type DeliveryAreaUpdateWithoutOrdersInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -854,6 +941,9 @@ export type DeliveryAreaUncheckedUpdateWithoutOrdersInput = {
   minDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDeliveryHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   freeDeliveryFrom?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  suburb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   radiusKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -913,6 +1003,9 @@ export type DeliveryAreaSelect<ExtArgs extends runtime.Types.Extensions.Internal
   minDeliveryHours?: boolean
   maxDeliveryHours?: boolean
   freeDeliveryFrom?: boolean
+  state?: boolean
+  city?: boolean
+  suburb?: boolean
   latitude?: boolean
   longitude?: boolean
   radiusKm?: boolean
@@ -934,6 +1027,9 @@ export type DeliveryAreaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   minDeliveryHours?: boolean
   maxDeliveryHours?: boolean
   freeDeliveryFrom?: boolean
+  state?: boolean
+  city?: boolean
+  suburb?: boolean
   latitude?: boolean
   longitude?: boolean
   radiusKm?: boolean
@@ -952,6 +1048,9 @@ export type DeliveryAreaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   minDeliveryHours?: boolean
   maxDeliveryHours?: boolean
   freeDeliveryFrom?: boolean
+  state?: boolean
+  city?: boolean
+  suburb?: boolean
   latitude?: boolean
   longitude?: boolean
   radiusKm?: boolean
@@ -970,6 +1069,9 @@ export type DeliveryAreaSelectScalar = {
   minDeliveryHours?: boolean
   maxDeliveryHours?: boolean
   freeDeliveryFrom?: boolean
+  state?: boolean
+  city?: boolean
+  suburb?: boolean
   latitude?: boolean
   longitude?: boolean
   radiusKm?: boolean
@@ -978,7 +1080,7 @@ export type DeliveryAreaSelectScalar = {
   updatedAt?: boolean
 }
 
-export type DeliveryAreaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "baseFee" | "minDeliveryDays" | "maxDeliveryDays" | "minDeliveryHours" | "maxDeliveryHours" | "freeDeliveryFrom" | "latitude" | "longitude" | "radiusKm" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["deliveryArea"]>
+export type DeliveryAreaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "baseFee" | "minDeliveryDays" | "maxDeliveryDays" | "minDeliveryHours" | "maxDeliveryHours" | "freeDeliveryFrom" | "state" | "city" | "suburb" | "latitude" | "longitude" | "radiusKm" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["deliveryArea"]>
 export type DeliveryAreaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addresses?: boolean | Prisma.DeliveryArea$addressesArgs<ExtArgs>
   orders?: boolean | Prisma.DeliveryArea$ordersArgs<ExtArgs>
@@ -1003,6 +1105,9 @@ export type $DeliveryAreaPayload<ExtArgs extends runtime.Types.Extensions.Intern
     minDeliveryHours: number | null
     maxDeliveryHours: number | null
     freeDeliveryFrom: runtime.Decimal | null
+    state: string | null
+    city: string | null
+    suburb: string | null
     latitude: runtime.Decimal | null
     longitude: runtime.Decimal | null
     radiusKm: runtime.Decimal | null
@@ -1443,6 +1548,9 @@ export interface DeliveryAreaFieldRefs {
   readonly minDeliveryHours: Prisma.FieldRef<"DeliveryArea", 'Int'>
   readonly maxDeliveryHours: Prisma.FieldRef<"DeliveryArea", 'Int'>
   readonly freeDeliveryFrom: Prisma.FieldRef<"DeliveryArea", 'Decimal'>
+  readonly state: Prisma.FieldRef<"DeliveryArea", 'String'>
+  readonly city: Prisma.FieldRef<"DeliveryArea", 'String'>
+  readonly suburb: Prisma.FieldRef<"DeliveryArea", 'String'>
   readonly latitude: Prisma.FieldRef<"DeliveryArea", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"DeliveryArea", 'Decimal'>
   readonly radiusKm: Prisma.FieldRef<"DeliveryArea", 'Decimal'>

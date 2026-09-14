@@ -371,6 +371,10 @@ model DeliveryArea {
   // Optional free delivery threshold
   freeDeliveryFrom  Decimal?            @db.Decimal(20, 4)
 
+  state String?
+  city String?
+  suburb String?
+
   // Optional geofencing / map support
   latitude          Decimal?            @db.Decimal(10, 7)
   longitude         Decimal?            @db.Decimal(10, 7)

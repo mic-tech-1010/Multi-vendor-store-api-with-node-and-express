@@ -66,7 +66,7 @@ app.use('/public/products', productDetailsRouter);
 
 app.use ('/public/cart', createCartRouter(cartService));
 
-app.use("/api/location", locationRouter);
+app.use("/public/location", locationRouter);
 
 const port: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000;
 
